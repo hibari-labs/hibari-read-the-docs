@@ -20,7 +20,8 @@ reasons:
   * Per-table options for RAM+disk-based or disk-only value storage
   * Support for per-key expiration times and per-key custom meta-data
   * Support for multi-key atomic transactions, within range limits
-  * A key timestamping mechanism that facilitates "test-and-set" type operations
+  * A key timestamping mechanism that facilitates "test-and-set" type
+    operations
   * Automatic data rebalancing as the system scales
   * Support for live code upgrades
   * Multiple client API implementations
@@ -31,14 +32,13 @@ turning to describe more fully the distinctive benefits that Hibari
 provides to developers, administrators, and users of data-intensive
 applications.
 
-
 Why NOSQL?
 ----------
 
-The NOSQL "movement" is, first off, not an outright rejection of
+The NOSQL *"movement"* is, first off, not an outright rejection of
 traditional relational database management systems (RDBMS) but rather
 a growing recognition that today's data environment requires a diverse
-storage toolset that is "Not Only SQL (NOSQL)". Relational and NOSQL
+storage toolset that is *"Not Only SQL (NOSQL)"*. Relational and NOSQL
 data storage solutions should be viewed as complements, with each
 approach better suited toward different types of applications and
 services.
