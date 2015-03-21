@@ -2,15 +2,66 @@
 
 *Copyright (c) 2005-2015 Hibari developers. All rights reserved.*
 
+=== Reading Hibari Docs
 
-=== How to Build (Local)
+All Hibari docs including the followings are available online at
+https://hibari.readthedocs.org
 
-. Install Shpinx (*TODO*)
-. Run +cd doc; make html+
+- Hibari Application Developer's Guide
+- Hibari System Administrator's Guide
+- Hibari Contributor's Guide
+
+You can also download the HTML and EPub versions of the docs from the
+above site.
+
+Hibari docs are hosted at https://readthedocs.org/[Read the Docs].
+
+=== Building Hibair Docs on Your PC
+
+If you wish to edit the docs, you might want to build the docs locally
+on your PC before sending a GitHub pull request. To do that, you need
+to install Sphinx.
+
+==== Installing Sphinx
+
+http://sphinx-doc.org/[Sphinx] is a tool that makes it easy to create
+beautiful documentation. Assuming you have Python and pip already,
+install Sphinx:
+
+----
+$ pip install sphinx sphinx-autobuild
+----
+
+You also need the https://github.com/snide/sphinx_rtd_theme[theme]
+provided by Read the Docs.
+
+----
+$ pip install sphinx_rtd_theme
+----
+
+Finally, you need a Sphinx extension called
+https://pythonhosted.org/sphinxcontrib-erlangdomain/[Erlang Domain]
+to render Erlang API document.
+
+----
+$ pip install sphinxcontrib-erlangdomain
+----
+
+==== Building Docs
+
+To build the doc run:
+
+----
+$ cd doc
+$ make html
+----
+
+Open up +doc/_builds/index.html+ from a web browser.
 
 
 === License
 
+----
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -22,7 +73,7 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-
+----
 
 === Note for License
 
