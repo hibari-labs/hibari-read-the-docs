@@ -80,8 +80,8 @@ those functional gaps as Hibari spreads outside of carrier data
 centers.
 
 .. tip::
-   The word **"Hibari"** means skylark in Japanese; the Kanji
-   characters stand for **"cloud bird"**.
+   **What does Hibari mean?** The word "Hibari" means skylark in
+   Japanese; the Kanji characters stand for **"cloud bird"**.
 
 A Quick Tour
 ------------

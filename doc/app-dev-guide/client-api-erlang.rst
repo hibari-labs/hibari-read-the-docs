@@ -409,139 +409,149 @@ Set ``Key`` and ``Value`` pair (and optional ``Flags``) in the table
 .. erl:function:: set(Tab, Key, Value, Timeout)
 .. erl:function:: set(Tab, Key, Value, ExpTime, Flags, Timeout)
 
-*Tab*
-
-- Name of the table in which to set the key-value pair.
-- Mandatory.
-- Type:
   * `Tab = table()`
   * `table() = atom()`
 
- ::
-*Key*
+      :param Table: Name of the table to which to set the key-value pair
 
-- Key to set in the table, in association with a paired value.
-- Mandatory.
-- Type:
-  * `Key = key()`
-  * `key() = iodata()`
-  * `iodata() = iolist() | binary()`
-  * `iolist()  = [char() | binary() | iolist()]`
-+
-NOTE: While the `Key` may be specified as either `iolist()` or
-`binary()`, it will be converted into binary before operation
-execution. The same is true of `Value`.
-+
+      - ``-type table() :: atom()``
 
- ::
-*Value*
+   :type Tab: table()
 
-- Value to associate with the key.
-- Mandatory.
-- Type:
-  * `Value = val()`
-  * `val() = iodata()`
-  * `iodata() = iolist() | binary()`
-  * `iolist()  = [char() | binary() | iolist()]`
+   :param Key:
+      Key to set in to the table, in association with a paired value
 
- ::
-*ExpTime*
+      - ``-type key() :: iodata()``
+      - ``-type iodata() :: iolist() | binary()``
+      - ``-type iolist(): [char() | binary() | iolist()]``
 
-- Time at which the key will expire, expressed as a Unix time_t().
-- Optional; defaults to 0 (no expiration).
-- Type:
-  * `ExpTime = exp_time()`
-  * `exp_time() = time_t()`
-  * `time_t() = integer()`
+   :type Key: key()
 
- ::
-*Flags*
+   .. note::
+      While the ``Key`` may be specified as either ``iolist()`` or
+      ``binary()``, it will be converted into binary before operation
+      execution. The same is true of ``Value``.
 
-- List of operational flags to apply to the `set' operation, and/or
-  custom property flags to associate with the key-value pair in the
-  database. Heavy use of custom property flags is discouraged due to
-  RAM-based storage.
-- Optional; defaults to empty list.
-- Type:
-  * `Flags = flags_list()`
-  * `flags_list() = [do_op_flag() | property()]`
-  * `do_op_flag() = {'testset', timestamp()} | 'value_in_ram' |
-    {'exp_time_directive', 'keep' | 'replace'} |
-    {'attrib_directive', 'keep' | 'replace'}`
-  * `timestamp() = integer()`
-  * `property() = atom() | {term(), term()}`
-- Operational flag usage
-  * `{'testset', timestamp()}`
-    ** Fail the operation if the existing key's timestamp is not
-       exactly equal to `timestamp()`.  If used inside a
-       link:#brick-simple-do[micro-transaction], abort the transaction
-       if the key's timestamp is not exactly equal to
-       `timestamp()`. Using this flag with `set` will result in an
-       error if the key does not already exist or if the key exists
-       but has a non-matching timestamp.
-  * `{'exp_time_directive', 'keep' | 'replace'}`
-    ** Default to `'replace'`
-    ** Specifies whether the ExpTime is kept from the old key value
-       pair or replaced with the ExpTime provided in the set
-       operation.
-  * `{'attrib_directive', 'keep' | 'replace'}``
-    ** Default to `'replace'`
-    ** Specifies whether the custom properties are kept from the old
-       key value pair or replaced with the custom properties provided
-       in the set operation.
-    ** If kept, the custom properties remain unchanged. If you specify
-       custom properties explicitly in the set operation, Hibari adds
-       them to the resulting key value pair.
-    ** If replaced, all original custom properties are deleted, and
-       then Hibari adds the custom properties in the set operation to
-       the resulting key value pair.
-  * `'value_in_ram'`
-    ** Store the value blob in RAM, overriding the default storage
-       location of the brick.
-+
-NOTE: This did not extensively tested by Cloudian QA.
-+
+   :param Value: Value to associate with the key
 
- ::
-*Timeout*
+      - ``-type val() :: iodata()``
+      - ``-type iodata() :: iolist() | binary()``
+      - ``-type iolist() :: [char() | binary() | iolist()]``
 
-- Operation timeout in milliseconds.
-- Optional; defaults to 15000.
-- Type:
-  * `Timeout = timeout()`
-  * `timeout() = integer() | 'infinity'`
+   :param ExpTime:
 
-RETURNS
+      - Time at which the key will expire, expressed as a Unix
+        ``time_t()``.
+      - **Optional;** defaults to 0 (no expiration).
+      - ``-type exp_time() :: time_t()``
+      - ``-type time_t() :: integer()``
 
- ::
-Success return
+   :type ExpTime: exp_time()
 
-- `{'ok', timestamp()}`
+   :param Flags:
 
- ::
-Error returns
+      - List of operational flags to apply to the ``set`` operation,
+        and/or custom property flags to associate with the key-value
+        pair in the database. Heavy use of custom property flags is
+        discouraged due to RAM-based storage
+      - **Optional;** defaults to empty list
 
-- `'key_not_exist'`
-  * The operation failed because the `{'testset', timestamp()}` flag
-    was used and the key does not exist.
-- `{'ts_error', timestamp()}`
-  * The operation failed because the `{'testset', timestamp()}` flag
-    was used and there was a timestamp mismatch. The `timestamp()` in
-    the return is the current value of the existing key's timestamp.
-  * `timestamp() = integer()`
-- `'invalid_flag_present'`
-  * The operation failed because an invalid `do_op_flag()` was found
-    in the `Flags` argument.
-- `'brick_not_available'`
-  * The operation failed because the chain that is responsible for
-    this key is currently length zero and therefore unavailable.
-- `{{'nodedown',node()},{'gen_server','call',term()}}`
-  * The operation failed because the server brick handling the request
-    has crashed or else a network partition has occurred between the
-    client and server. The client should resend the query after a
-    short delay, on the assumption that the Admin Server will have
-    detected the failure and taken steps to repair the chain.
-  * `node() = atom()`
+      - ``-type flags_list(): [do_op_flag() | property()]``
+      - ``-type do_op_flag(): {'testset', timestamp()} | 'value_in_ram'``
+        ``{'exp_time_directive', 'keep' | 'replace'} |``
+        ``{'attrib_directive', 'keep' | 'replace'}``
+      - ``-type timestamp() = integer()``
+      - ``-type property(): atom() | {term(), term()}``
+      - Operational flag usage
+
+        * ``{'testset', timestamp()}``
+
+          * Fail the operation if the existing key's timestamp is not
+            exactly equal to ``timestamp()``.  If used inside a
+            link:#brick-simple-do[micro-transaction], abort the
+            transaction if the key's timestamp is not exactly equal to
+            ``timestamp()``. Using this flag with ``set`` will result
+            in an error if the key does not already exist or if the
+            key exists but has a non-matching timestamp.
+
+        * ``{'exp_time_directive', 'keep' | 'replace'}``
+
+          * Default to ``'replace'``
+          * Specifies whether the ``ExpTime`` is kept from the old key
+            value pair or replaced with the ``ExpTime`` provided in
+            the replace operation
+
+        * ``{'attrib_directive', 'keep' | 'replace'}``
+
+          * Default to ``'replace'``
+          * Specifies whether the custom properties are kept from the
+            old key value pair or replaced with the custom properties
+            provided in the set operation
+          * If kept, the custom properties remain unchanged. If you
+            specify custom properties explicitly in the set
+            operation, Hibari adds them to the resulting key value
+            pair
+          * If replaced, all original custom properties are deleted,
+            and then Hibari adds the custom properties in the set
+            operation to the resulting key value pair
+
+        * ``'value_in_ram'``
+
+          * Store the value blob in RAM, overriding the default
+            storage location of the brick
+
+          .. note::
+             ``'value_in_ram'`` flag have not been extensively tested
+
+   :type Flags: flags_list()
+
+   :param Timeout:
+
+      - Operation timeout in milliseconds
+      - **Optional;** defaults to 15000
+      - ``-type timeout(): integer() | 'infinity'``
+
+   :type Timeout: timeout()
+
+   **Success return**
+
+   :rtype: ``{'ok', timestamp()}``
+
+   **Error returns**
+
+   :rtype: ``'key_not_exists'``
+
+      - The operation failed because the ``{'testset', timestamp()}``
+        flag was used and  key does not exist
+      - ``-type timestamp(): integer()``
+
+   :rtype: ``{'ts_error', timestamp()}``
+
+      - The operation failed because the ``{'testset', timestamp()}``
+        flag was used and there was a timestamp mismatch. The
+        ``timestamp()`` in the return is the current value of the
+        existing key's timestamp.
+      - ``timestamp() = integer()``
+
+   :rtype: ``'invalid_flag_present'``
+
+      - The operation failed because an invalid ``do_op_flag()`` was
+        found in the ``Flags`` argument.
+
+   :rtype: ``'brick_not_available'``
+
+      - The operation failed because the chain that is responsible for
+        this key is currently length zero and therefore unavailable.
+
+   :rtype: ``{{'nodedown',node()},{'gen_server','call',term()}}``
+
+      - The operation failed because the server brick handling the
+        request has crashed or else a network partition has occurred
+        between the client and server. The client should resend the
+        query after a short delay, on the assumption that the Admin
+        Server will have detected the failure and taken steps to
+        repair the chain.
+      - ``-type node(): atom()``
 
 Examples
 ^^^^^^^^
@@ -585,142 +595,147 @@ table ``Table`` if the key already exists. The operation will fail if:
 .. erl:function:: rename(Tab, Key, NewKey, Timeout)
 .. erl:function:: rename(Table, Key, NewKey, ExpTime, Flags, Timeout)
 
-*Tab*
+       :param Table: Name of the table to which to rename the
+                     key-value pair
 
-- Name of the table in which to rename the key-value pair.
-- Mandatory.
-- Type:
-  * `Tab = table()`
-  * `table() = atom()`
+      - ``-type table() :: atom()``
 
- ::
-*Key*
+   :param Key:
+      Key to rename in to the table, in association with a paired value
 
-- Key to rename in the table, in association with an existing paired value.
-- Mandatory.
-- Type:
-  * `Key = key()`
-  * `key() = iodata()`
-  * `iodata() = iolist() | binary()`
-  * `iolist()  = [char() | binary() | iolist()]`
-+
-NOTE: While the `Key` may be specified as either `iolist()` or
-`binary()`, it will be converted into binary before operation
-execution.
-+
+      - ``-type key() :: iodata()``
+      - ``-type iodata() :: iolist() | binary()``
+      - ``-type iolist(): [char() | binary() | iolist()]``
 
- ::
-*NewKey*
+   :type Key: key()
 
-- NewKey in the table, in association with an existing paired value.
-- Mandatory.
-- Type:
-  * `NewKey = key()`
-  * `key() = iodata()`
-  * `iodata() = iolist() | binary()`
-  * `iolist()  = [char() | binary() | iolist()]`
-+
-NOTE: While the `NewKey` may be specified as either `iolist()` or
-`binary()`, it will be converted into binary before operation
-execution.
-+
+   .. note::
+      While the ``Key`` may be specified as either ``iolist()`` or
+      ``binary()``, it will be converted into binary before operation
+      execution. The same is true of ``NewKey``
 
- ::
-*ExpTime*
+   :param NewKey:
+      NewKey in the table, in association with an existing paired
+      value
 
-- Time at which the key will expire, expressed as a Unix time_t().
-- Optional; defaults to 0 (no expiration).
-- Type:
-  * `ExpTime = exp_time()`
-  * `exp_time() = time_t()`
-  * `time_t() = integer()`
+      - ``-type val() :: iodata()``
+      - ``-type iodata() :: iolist() | binary()``
+      - ``-type iolist() :: [char() | binary() | iolist()]``
 
- ::
-*Flags*
+   :param ExpTime:
 
-- List of operational flags to apply to the `rename' operation,
-  and/or custom property flags to associate with the key-value pair in
-  the database. Heavy use of custom property flags is discouraged due
-  to RAM-based storage.
-- Optional; defaults to empty list.
-- Type:
-  * `Flags = flags_list()`
-  * `flags_list() = [do_op_flag() | property()]`
-  * `do_op_flag() = {'testset', timestamp()} | 'value_in_ram' |
-    {'exp_time_directive', 'keep' | 'replace'} |
-    {'attrib_directive', 'keep' | 'replace'}`
-  * `timestamp() = integer()`
-  * `property() = atom() | {term(), term()}`
-- Operational flag usage
-  * `{'testset', timestamp()}`
-    ** Fail the operation if the existing key's timestamp is not
-       exactly equal to `timestamp()`.  If used inside a
-       link:#brick-simple-do[micro-transaction], abort the transaction
-       if the key's timestamp is not exactly equal to `timestamp()`.
-  * `{'exp_time_directive', 'keep' | 'replace'}`
-    ** Default to `'keep'`
-    ** Specifies whether the ExpTime is kept from the old key value
-       pair or replaced with the ExpTime provided in the rename
-       operation.
-  * `{'attrib_directive', 'keep' | 'replace'}``
-    ** Default to `'keep'`
-    ** Specifies whether the custom properties are kept from the old
-       key value pair or replaced with the custom properties provided
-       in the rename operation.
-    ** If kept, the custom properties remain unchanged. If you specify
-       custom properties explicitly in the rename operation, Hibari
-       adds them to the resulting key value pair.
-    ** If replaced, all original custom properties are deleted, and
-       then Hibari adds the custom properties in the rename operation
-       to the resulting key value pair.
-  * `'value_in_ram'`
-    ** Store the value blob in RAM, overriding the default storage
-       location of the brick.
-+
-NOTE: This flag has not yet been extensively tested by Cloudian QA.
-+
+      - Time at which the key will expire, expressed as a Unix
+        ``time_t()``.
+      - **Optional;** defaults to 0 (no expiration).
+      - ``-type exp_time() :: time_t()``
+      - ``-type time_t() :: integer()``
 
- ::
-*Timeout*
+   :type ExpTime: exp_time()
 
-- Operation timeout in milliseconds.
-- Optional; defaults to 15000.
-- Type:
-  * `Timeout = timeout()`
-  * `timeout() = integer() | 'infinity'`
+   :param Flags:
 
-RETURNS
+      - List of operational flags to apply to the ``rename``
+        operation, and/or custom property flags to associate with the
+        key-value pair in the database. Heavy use of custom property
+        flags is discouraged due to RAM-based storage
+      - **Optional;** defaults to empty list
 
- ::
-Success return
+      - ``-type flags_list(): [do_op_flag() | property()]``
+      - ``-type do_op_flag(): {'testset', timestamp()} | 'value_in_ram'``
+        ``{'exp_time_directive', 'keep' | 'replace'} |``
+        ``{'attrib_directive', 'keep' | 'replace'}``
+      - ``-type timestamp() = integer()``
+      - ``-type property(): atom() | {term(), term()}``
+      - Operational flag usage
 
-- `{'ok', timestamp()}`
+        * ``{'testset', timestamp()}``
 
- ::
-Error returns
+          * Fail the operation if the existing key's timestamp is not
+            exactly equal to ``timestamp()``.  If used inside a
+            link:#brick-simple-do[micro-transaction], abort the
+            transaction if the key's timestamp is not exactly equal to
+            ``timestamp()``.
 
-- `'key_not_exist'`
-  * The operation failed because the key does not exist or because key
-    and the new key are equal.
-- `{'ts_error', timestamp()}`
-  * The operation failed because the `{'testset', timestamp()}` flag
-    was used and there was a timestamp mismatch. The `timestamp()` in
-    the return is the current value of the existing key's timestamp.
-  * `timestamp() = integer()`
-- `'invalid_flag_present'`
-  * The operation failed because an invalid `do_op_flag()` was found
-    in the `Flags` argument.
-- `'brick_not_available'`
-  * The operation failed because the chain that is responsible for
-    this key and the new key is currently length zero and therefore
-    unavailable.
-- `{{'nodedown',node()},{'gen_server','call',term()}}`
-  * The operation failed because the server brick handling the request
-    has crashed or else a network partition has occurred between the
-    client and server. The client should resend the query after a
-    short delay, on the assumption that the Admin Server will have
-    detected the failure and taken steps to repair the chain.
-  * `node() = atom()`
+        * ``{'exp_time_directive', 'keep' | 'replace'}``
+
+          * Default to ``'keep'``
+          * Specifies whether the ``ExpTime`` is kept from the old key
+            value pair or replaced with the ``ExpTime`` provided in
+            the rename operation
+
+        * ``{'attrib_directive', 'keep' | 'replace'}``
+
+          * Default to ``'keep'``
+          * Specifies whether the custom properties are kept from the
+            old key value pair or replaced with the custom properties
+            provided in the rename operation
+          * If kept, the custom properties remain unchanged. If you
+            specify custom properties explicitly in the rename
+            operation, Hibari adds them to the resulting key value
+            pair
+          * If replaced, all original custom properties are deleted,
+            and then Hibari adds the custom properties in the rename
+            operation to the resulting key value pair
+
+        * ``'value_in_ram'``
+
+          * Store the value blob in RAM, overriding the default
+            storage location of the brick
+
+          .. note::
+             ``'value_in_ram'`` flag have not been extensively tested
+
+   :type Flags: flags_list()
+
+   :param Timeout:
+
+      - Operation timeout in milliseconds
+      - **Optional;** defaults to 15000
+      - ``-type timeout(): integer() | 'infinity'``
+
+   :type Timeout: timeout()
+
+
+   **Success return**
+
+   :rtype: ``{'ok', timestamp()}``
+
+   **Error returns**
+
+   :rtype: ``'key_not_exists'``
+
+      - The operation failed because the key does not exist or because
+        key and the new key are equal
+      - ``-type timestamp(): integer()``
+
+   :rtype: ``{'ts_error', timestamp()}``
+
+      - The operation failed because the ``{'testset', timestamp()}``
+        flag was used and there was a timestamp mismatch. The
+        ``timestamp()`` in the return is the current value of the
+        existing key's timestamp.
+      - ``timestamp() = integer()``
+
+   :rtype: ``'invalid_flag_present'``
+
+      - The operation failed because an invalid ``do_op_flag()`` was
+        found in the ``Flags`` argument.
+
+   :rtype: ``'brick_not_available'``
+
+      - The operation failed because the chain that is responsible for
+        this key and the new key is currently length zero and
+        therefore unavailable.
+
+   :rtype: ``{{'nodedown',node()},{'gen_server','call',term()}}``
+
+      - The operation failed because the server brick handling the
+        request has crashed or else a network partition has occurred
+        between the client and server. The client should resend the
+        query after a short delay, on the assumption that the Admin
+        Server will have detected the failure and taken steps to
+        repair the chain.
+      - ``-type node(): atom()``
 
 Examples
 ^^^^^^^^
@@ -769,6 +784,15 @@ From table `Table`, retrieve `Key` and specified attributes of the key
 .. erl:function:: get(Tab, Key, Flags)
 .. erl:function:: get(Tab, Key, Timeout)
 .. erl:function:: get(Tab, Key, Flags, Timeout)
+
+   * `Tab = table()`
+     * `table() = atom()`
+
+       :param Table:
+          Name of the table to which to retrieve the key-value pair
+       - ``-type table() :: atom()``
+
+   :type Tab: table()
 
 *Tab*
 
@@ -928,6 +952,16 @@ results.
 .. erl:function:: get_many(Tab, Key, MaxNum, Flags)
 .. erl:function:: get_many(Tab, Key, MaxNum, Timeout)
 .. erl:function:: get_many(Tab, Key, MaxNum, Flags, Timeout)
+
+  * `Tab = table()`
+  * `table() = atom()`
+
+      :param Table:
+         Name of the table to which to retrieve the key-value pairs
+
+      - ``-type table() :: atom()``
+
+   :type Tab: table()
 
 *Tab*
 
@@ -1090,7 +1124,16 @@ Delete key `Key` from the table `Table`. The operation will fail if
 .. erl:function:: delete(Tab, Key, Timeout)
 .. erl:function:: delete(Tab, Key, Flags, Timeout)
 
-*Tab*
+  * `Tab = table()`
+  * `table() = atom()`
+
+      :param Table: Name of the table form which to delete the key-value pair
+
+      - ``-type table() :: atom()``
+
+   :type Tab: table()
+
+              *Tab*
 - Name of the table from which to delete the key and its associated
   value.
 - Mandatory.
