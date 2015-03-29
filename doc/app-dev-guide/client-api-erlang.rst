@@ -803,25 +803,32 @@ From table `Table`, retrieve `Key` and specified attributes of the key
       ``binary()``, it will be converted into binary before operation
       execution
 
- ::
-*Flags*
+   :param Flags:
 
-- List of operational flags to apply to the `get' operation.
-- Optional; defaults to empty list.
-- Type:
-  * `Flags = flags_list()`
-  * `flags_list() = [do_op_flag()]`
-  * `do_op_flag() = 'get_all_attribs' | 'witness' | {'testset',
-    timestamp()} | 'must_exist' | 'must_not_exist'`
-  * `timestamp() = integer()`
-- Operational flag usage
+      - List of operational flags to apply to the ``get`` operation.
+      - **Optional;** defaults to empty list
+
+      - ``-type flags_list(): [do_op_flag()]``
+      - ``-type do_op_flag(): 'get_all_attribs' | 'witness' | {'testset', timestamp()} | 'must_exist' | 'must_not_exist'``
+      - ``-type timestamp() = integer()``
+      - Operational flag usage
+
+   :type Flags: flags_list()
+
+
   * `'get_all_attribs'`
     ** Return all attributes of the key. May be used in combination
        with the `witness` flag.
+
+
+
   * `'witness'`
     ** Do not return the value blob in the result. This flag will
        guarantee that the brick does not require disk access to
        satisfy this request.
+
+
+
   * `{'testset', timestamp()}`
     ** Fail the operation if the key's timestamp is not exactly equal
        to `timestamp()`. If used inside a
@@ -829,28 +836,28 @@ From table `Table`, retrieve `Key` and specified attributes of the key
        if the key's timestamp is not exactly equal to `timestamp()`.
        This flag has priority over the `'must_exist'` and
        `'must_not_exist'` flags.
+
+
   * `'must_exist'`
     ** For use inside a link:#brick-simple-do[micro-transaction]:
        abort the transaction if the key does not exist.
+
+
   * `'must_not_exist'`
     ** For use inside a link:#brick-simple-do[micro-transaction]:
        abort the transaction if the key exists. This flag may be useful
        when the relationship between two or more keys is important to
        the client application.
 
- ::
-*Timeout*
+   :param Timeout:
 
-- Operation timeout in milliseconds.
-- Optional; defaults to 15000.
-- Type:
-  * `Timeout = timeout()`
-  * `timeout() = integer() | 'infinity'`
+      - Operation timeout in milliseconds
+      - **Optional;** defaults to 15000
+      - ``-type timeout(): integer() | 'infinity'``
 
-RETURNS
+   :type Timeout: timeout()
 
- ::
-Success returns
+**Success returns**
 
 - `{'ok', timestamp(), val()}`
   * Success return when the get request uses neither the `'witness'`
@@ -875,8 +882,7 @@ list will always be `{val_len,Size::integer()}`, where `Size` is the
 size of the value blob in bytes.
 +
 
- ::
-Error returns
+**Error returns**
 
 - `'key_not_exist'`
   * The operation failed because the key does not exist.
@@ -968,49 +974,59 @@ results.
 - Type:
   * `MaxNum = integer()`
 
- ::
-*Flags*
+   :param Flags:
 
-- List of operational flags to apply to the `get_many' operation.
-- Optional; defaults to empty list.
-- Type:
-  * `Flags = flags_list()`
-  * `flags_list() = [do_op_flag()]`
-  * `do_op_flag() = 'get_all_attribs' | 'witness' | {'binary_prefix',
-    binary()} | {'max_bytes', integer()}` | `{'max_num', integer()}`
-- Operational flag usage
+      - List of operational flags to apply to the ``get_many``
+        operation.
+      - **Optional;** defaults to empty list
+
+      - ``-type flags_list(): [do_op_flag()]``
+      - ``-type do_op_flag(): 'get_all_attribs' | 'witness' | {'binary_prefix', binary()} | {'max_bytes', integer()} | {'max_num', integer()}``
+      - ``-type timestamp() = integer()``
+      - ``-type property(): atom() | {term(), term()}``
+      - Operational flag usage
+
+   :type Flags: flags_list()
+
   * `'get_all_attribs'`
     ** Return all attributes of each key. May be used in combination
        with the `witness` flag.
+
+
+
   * `'witness'`
     ** Do not return the value blobs in the result. This flag will
        guarantee that the brick does not require disk access to
        satisfy this request.
+
+
+
   * `{'binary_prefix', binary()}`
     ** Return only keys that have a binary prefix that is exactly
        equal to `binary()`.
+
+
+
   * `{'max_bytes', integer()}`
     ** Return only as many keys as the sum of the sizes of their
        corresponding value blobs does not exceed `integer()` bytes.
        If this flag is not explicity specified in a client request,
        the value defaults to 2GB.
+
+
   * `{'max_num', integer()}`
     ** Maxinum number of keys to return. Defaults to 10. Note: This
        flag is duplicative of the MaxNum argument in purpose.
 
- ::
-*Timeout*
+   :param Timeout:
 
-- Operation timeout in milliseconds.
-- Optional; defaults to 15000.
-- Type:
-  * `Timeout = timeout()`
-  * `timeout() = integer() | 'infinity'`
+      - Operation timeout in milliseconds
+      - **Optional;** defaults to 15000
+      - ``-type timeout(): integer() | 'infinity'``
 
-RETURNS
+   :type Timeout: timeout()
 
- ::
-Success returns
+**Success returns**
 
 - `{ok, {[{key(), timestamp(), val()}], boolean()}}`
   * Success return when the `get_many` request uses neither the
@@ -1042,7 +1058,7 @@ Success returns
    always be ``{val_len, Size::integer()}``, where ``Size`` is the
    size of the value blob in bytes.
 
-Error returns
+**Error returns**
 
 - `'invalid_flag_present'`
   * The operation failed because an invalid `do_op_flag()` was found
@@ -1118,17 +1134,19 @@ Delete key `Key` from the table `Table`. The operation will fail if
       ``binary()``, it will be converted into binary before operation
       execution
 
- ::
-*Flags*
+   :param Flags:
 
-- List of operational flags to apply to the `delete' operation.
-- Optional; defaults to empty list.
-- Type:
-  * `Flags = flags_list()`
-  * `flags_list() = [do_op_flag()]`
-  * `do_op_flag() = {'testset', timestamp()} |'must_exist' | 'must_not_exist'`
-  * `timestamp() = integer()`
-- Operational flag usage
+      - List of operational flags to apply to the ``delete``
+        operation.
+      - **Optional;** defaults to empty list
+
+      - ``-type flags_list(): [do_op_flag()]``
+      - ``-type do_op_flag(): {'testset', timestamp()} | 'must_exist' | 'must_not_exist'``
+      - ``-type timestamp() = integer()``
+      - Operational flag usage
+
+   :type Flags: flags_list()
+
   * `{'testset', timestamp()}`
     ** Fail the operation if the existing key's timestamp is not
        exactly equal to `timestamp()`.  If used inside a
@@ -1136,33 +1154,32 @@ Delete key `Key` from the table `Table`. The operation will fail if
        if the key's timestamp is not exactly equal to
        `timestamp()`. This flag has priority over the `'must_exist'` and
        `'must_not_exist'` flags
+
+
   * `'must_exist'`
     ** For use inside a link:#brick-simple-do[micro-transaction]:
        abort the transaction if the key does not exist.
+
+
   * `'must_not_exist'`
     ** For use inside a link:#brick-simple-do[micro-transaction]:
        abort the transaction if the key exists. This flag may be useful
        when the relationship between two or more keys is important to
        the client application.
 
- ::
-*Timeout*
+   :param Timeout:
 
-- Operation timeout in milliseconds.
-- Optional; defaults to 15000.
-- Type:
-  * `Timeout = timeout()`
-  * `timeout() = integer() | 'infinity'`
+      - Operation timeout in milliseconds
+      - **Optional;** defaults to 15000
+      - ``-type timeout(): integer() | 'infinity'``
 
-RETURNS
+   :type Timeout: timeout()
 
- ::
-Success return
+**Success return**
 
 - `'ok'`
 
- ::
-Error returns
+**Error returns**
 
 - `'key_not_exist'`
   * The operation failed because the key does not exist.
@@ -1287,41 +1304,42 @@ Administrator's Guide, "Micro-Transactions" section].
        link:#brick-simple-get-many[brick_simple:get_many/5], and
        link:#brick-simple-delete[brick_simple:delete/4].
 
- ::
-*OpFlags*
+   :param OpFlags:
 
-- List of operational flags to apply to the overall `do' operation.
-- Optional; defaults to empty list.
-- Type:
-  * `OpFlags = do_flags_list()`
-  * `do_flags_list() = [do_flag()]`
-  * `do_flag() = 'fail_if_wrong_role' | 'ignore_role'`
-- Operational flag usage
-  * `'fail_if_wrong_role'`
+      - List of operational flags to apply to the overall ``do``
+        operation.
+      - **Optional;** defaults to empty list
+
+      - ``-type do_flags_list(): [do_flag()]``
+      - ``-type do_flag(): 'fail_if_wrong_role' | 'ignore_role'``
+      - Operational flag usage
+
+   :type OpFlags: do_flags_list()
+
+
+   * `'fail_if_wrong_role'`
     ** If the 'do' operation is sent to the wrong brick in the target
        chain (e.g. a 'read' request mistakenly sent to the 'head' brick or
        a 'write' request mistakenly sent to the 'tail' brick), fail the
        transaction immediately. If this flag is not used, the default
        behavior is for the incorrect brick to forward the request to the
        correct brick.
-  * `'ignore_role'`
+
+
+   * `'ignore_role'`
     ** If this flag is used, then whichever brick receives the request
        will reply to the request directly, regardless of the brick's assigned
        role.
 
- ::
-*Timeout*
+   :param Timeout:
 
-- Operation timeout in milliseconds.
-- Optional; defaults to 15000.
-- Type:
-  * `Timeout = timeout()`
-  * `timeout() = integer() | 'infinity'`
+      - Operation timeout in milliseconds
+      - **Optional;** defaults to 15000
+      - ``-type timeout(): integer() | 'infinity'``
 
-RETURNS
+   :type Timeout: timeout()
 
- ::
-Success return
+**Success return**
 
 - `[do1_res_ok]`
   * List of `do1_res_ok`, one for each primitive operation specified
@@ -1346,8 +1364,7 @@ Success return
     link:#brick-simple-get-many[get_many], and
     link:#brick-simple-delete[delete].
 
- ::
-Error returns
+**Error returns**
 
 - `{txn_fail, [{integer(), do1_res_fail()}]}`
   * Operation failed because transaction semantics were used in the
@@ -1469,7 +1486,28 @@ operations, see http://www.erlang.org/doc/man/lists.html#foldl-3.
 - Type:
   * `NumItems  = integer()`
 
- ::
+   :param Flags:
+
+
+******************TODO*********************
+
+      - List of operational flags to apply to the ``rename``
+        operation, and/or custom property flags to associate with the
+        key-value pair in the database. Heavy use of custom property
+        flags is discouraged due to RAM-based storage
+      - **Optional;** defaults to empty list
+
+      - ``-type flags_list(): [do_op_flag() | property()]``
+      - ``-type do_op_flag(): {'testset', timestamp()} | 'value_in_ram'``
+        ``{'exp_time_directive', 'keep' | 'replace'} |``
+        ``{'attrib_directive', 'keep' | 'replace'}``
+      - ``-type timestamp() = integer()``
+      - ``-type property(): atom() | {term(), term()}``
+      - Operational flag usage
+
+   :type Flags: flags_list()
+
+
 *Flags*
 - List of operational flags to apply to the `fold_table'
   operation. The supported flags are the same as those for
@@ -1508,26 +1546,21 @@ operations, see http://www.erlang.org/doc/man/lists.html#foldl-3.
 - Type:
   * `MaxParallel = integer()`
 
- ::
-*Timeout*
+   :param Timeout:
 
-- Operation timeout in milliseconds.
-- Optional; defaults to 5000.
-- Type:
-  * `Timeout = timeout()`
-  * `timeout() = integer()
+      - Operation timeout in milliseconds
+      - **Optional;** defaults to 15000
+      - ``-type timeout(): integer() | 'infinity'``
 
-RETURNS
+   :type Timeout: timeout()
 
- ::
-Success return
+**Success return**
 
 - `{ok, Acc, Iterations}`
   * `Acc = term()`
   * `Iterations = integer()`
 
- ::
-Error return
+**Error return**
 
 - `{error, GdssError, Acc, Iterations}`
   * `GdssError = term()`
@@ -1605,6 +1638,25 @@ this operations, see http://www.erlang.org/doc/man/lists.html#foldl-3.
 - Type:
   * `Acc  = term()`
 
+   :param Flags:
+
+      - List of operational flags to apply to the ``rename``
+        operation, and/or custom property flags to associate with the
+        key-value pair in the database. Heavy use of custom property
+        flags is discouraged due to RAM-based storage
+      - **Optional;** defaults to empty list
+
+      - ``-type flags_list(): [do_op_flag() | property()]``
+      - ``-type do_op_flag(): {'testset', timestamp()} | 'value_in_ram'``
+        ``{'exp_time_directive', 'keep' | 'replace'} |``
+        ``{'attrib_directive', 'keep' | 'replace'}``
+      - ``-type timestamp() = integer()``
+      - ``-type property(): atom() | {term(), term()}``
+      - Operational flag usage
+
+
+   :type Flags: flags_list()
+
  ::
 *Flags0*
 
@@ -1645,26 +1697,21 @@ this operations, see http://www.erlang.org/doc/man/lists.html#foldl-3.
 - Type:
   * `SleepTime = integer()`
 
- ::
-*Timeout*
+   :param Timeout:
 
-- Operation timeout in milliseconds.
-- Optional; defaults to 15000.
-- Type:
-  * `Timeout = timeout()`
-  * `timeout() = integer()
+      - Operation timeout in milliseconds
+      - **Optional;** defaults to 15000
+      - ``-type timeout(): integer() | 'infinity'``
 
-RETURNS
+   :type Timeout: timeout()
 
- ::
-Success return
+**Success return**
 
 - `{ok, Acc, Iterations}`
   * `Acc = term()`
   * `Iterations = integer()`
 
- ::
-Error return
+**Error return**
 
 - `{error, GdssError, Acc, Iterations}`
   * `GdssError = term()`
