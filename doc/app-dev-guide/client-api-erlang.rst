@@ -89,10 +89,9 @@ if ``Key`` already exists.
 
       - ``-type table() :: atom()``
 
-   :type Tab: table()
+   :type Table: table()
 
-   :param Key:
-      Key to add to the table, in association with a paired value
+   :param Key: Key to add to the table, in association with a paired value
 
       - ``-type key() :: iodata()``
       - ``-type iodata() :: iolist() | binary()``
@@ -216,17 +215,16 @@ Replace ``Key`` and ``Value`` pair (and optional ``Flags``) in the
 table ``Table`` if the key already exists. The operation will fail if
 ``Key`` does not already exist
 
-.. erl:function:: replace(Tab, Key, Value)
-.. erl:function:: replace(Tab, Key, Value, Flags)
-.. erl:function:: replace(Tab, Key, Value, Timeout)
+.. erl:function:: replace(Table, Key, Value)
+.. erl:function:: replace(Table, Key, Value, Flags)
+.. erl:function:: replace(Table, Key, Value, Timeout)
 .. erl:function:: replace(Table, Key, Value, ExpTime, Flags, Timeout)
 
-   :param Table:
-      Name of the table in which to replace the key-value pair.
+   :param Table: Name of the table in which to replace the key-value pair.
 
       - ``-type table() :: atom()``
 
-   :type Tab: table()
+   :type Table: table()
 
    :param Key:
       Key to replace in the table, in association with a new paired
@@ -404,19 +402,16 @@ brick_simple:set/6
 Set ``Key`` and ``Value`` pair (and optional ``Flags``) in the table
 ``Table``, regardless of whether or not the key already exists.
 
-.. erl:function:: set(Tab, Key, Value)
-.. erl:function:: set(Tab, Key, Value, Flags)
-.. erl:function:: set(Tab, Key, Value, Timeout)
-.. erl:function:: set(Tab, Key, Value, ExpTime, Flags, Timeout)
+.. erl:function:: set(Table, Key, Value)
+.. erl:function:: set(Table, Key, Value, Flags)
+.. erl:function:: set(Table, Key, Value, Timeout)
+.. erl:function:: set(Table, Key, Value, ExpTime, Flags, Timeout)
 
-  * `Tab = table()`
-  * `table() = atom()`
-
-      :param Table: Name of the table to which to set the key-value pair
+   :param Table: Name of the table to which to set the key-value pair
 
       - ``-type table() :: atom()``
 
-   :type Tab: table()
+   :type Table: table()
 
    :param Key:
       Key to set in to the table, in association with a paired value
@@ -590,15 +585,17 @@ table ``Table`` if the key already exists. The operation will fail if:
 - ... or ``Key`` and ``NewKey`` do not share a common key prefix.
   (See **TODO** (Creating New Table - VarPrefix) for more details)
 
-.. erl:function:: rename(Tab, Key, NewKey)
-.. erl:function:: rename(Tab, Key, NewKey, Flags)
-.. erl:function:: rename(Tab, Key, NewKey, Timeout)
+.. erl:function:: rename(Table, Key, NewKey)
+.. erl:function:: rename(Table, Key, NewKey, Flags)
+.. erl:function:: rename(Table, Key, NewKey, Timeout)
 .. erl:function:: rename(Table, Key, NewKey, ExpTime, Flags, Timeout)
 
-       :param Table: Name of the table to which to rename the
-                     key-value pair
+   :param Table:
+      Name of the table to which to rename the key-value pair
 
       - ``-type table() :: atom()``
+
+   :type Table: table()
 
    :param Key:
       Key to rename in to the table, in association with a paired value
@@ -780,43 +777,31 @@ brick_simple:get/4
 From table `Table`, retrieve `Key` and specified attributes of the key
 (as determined by `Flags`).
 
-.. erl:function:: get(Tab, Key)
-.. erl:function:: get(Tab, Key, Flags)
-.. erl:function:: get(Tab, Key, Timeout)
-.. erl:function:: get(Tab, Key, Flags, Timeout)
+.. erl:function:: get(Table, Key)
+.. erl:function:: get(Table, Key, Flags)
+.. erl:function:: get(Table, Key, Timeout)
+.. erl:function:: get(Table, Key, Flags, Timeout)
 
-   * `Tab = table()`
-     * `table() = atom()`
+   :param Table:
+      Name of the table from which to retrieve the key-value pair
 
-       :param Table:
-          Name of the table to which to retrieve the key-value pair
-       - ``-type table() :: atom()``
+      - ``-type table() :: atom()``
 
-   :type Tab: table()
+   :type Table: table()
 
-*Tab*
+   :param Key:
+      Key to retrieve from to the table
 
-- Name of the table from which to retrieve the key.
-- Mandatory.
-- Type:
-  * `Tab = table()`
-  * `table() = atom()`
+      - ``-type key() :: iodata()``
+      - ``-type iodata() :: iolist() | binary()``
+      - ``-type iolist(): [char() | binary() | iolist()]``
 
- ::
-*Key*
+   :type Key: key()
 
-- Key to retrieve from the table.
-- Mandatory.
-- Type:
-  * `Key = key()`
-  * `key() = iodata()`
-  * `iodata() = iolist() | binary()`
-  * `iolist()  = [char() | binary() | iolist()]`
-+
-NOTE: While the `Key` may be specified as either `iolist()` or
-`binary()`, it will be converted into binary before operation
-execution.
-+
+   .. note::
+      While the ``Key`` may be specified as either ``iolist()`` or
+      ``binary()``, it will be converted into binary before operation
+      execution
 
  ::
 *Flags*
@@ -948,45 +933,33 @@ results.
    single chain; all keys returned will come from that single brick
    only.
 
-.. erl:function:: get_many(Tab, Key, MaxNum)
-.. erl:function:: get_many(Tab, Key, MaxNum, Flags)
-.. erl:function:: get_many(Tab, Key, MaxNum, Timeout)
-.. erl:function:: get_many(Tab, Key, MaxNum, Flags, Timeout)
+.. erl:function:: get_many(Table, Key, MaxNum)
+.. erl:function:: get_many(Table, Key, MaxNum, Flags)
+.. erl:function:: get_many(Table, Key, MaxNum, Timeout)
+.. erl:function:: get_many(Table, Key, MaxNum, Flags, Timeout)
 
-  * `Tab = table()`
-  * `table() = atom()`
-
-      :param Table:
-         Name of the table to which to retrieve the key-value pairs
+   :param Table:
+      Name of the table to which to retrieve the key-value pair
 
       - ``-type table() :: atom()``
 
-   :type Tab: table()
+   :type Table: table()
 
-*Tab*
+   :param Key:
+      Key after which to start the ``get_many`` retrieval, proceeding
+      in lexicographic order with the first key after the specified
+      ``Key``
 
-- Name of the table from which to retrieve the keys.
-- Mandatory.
-- Type:
-  * `Tab = table()`
-  * `table() = atom()`
+      - ``-type key() :: iodata()``
+      - ``-type iodata() :: iolist() | binary()``
+      - ``-type iolist(): [char() | binary() | iolist()]``
 
- ::
-*Key*
-- Key after which to start the `get_many` retrieval, proceeding in
-  lexicographic order with the first key after the specified `Key`.
-- Mandatory.
-- Type:
-  * `Key = key()`
-  * `key() = iodata()`
-  * `iodata() = iolist() | binary()`
-  * `iolist()  = [char() | binary() | iolist()]`
-+
-NOTE: While the `Key` may be specified as either `iolist()` or
-`binary()`, it will be converted into binary before operation
-execution.
-+
+   :type Key: key()
 
+   .. note::
+      While the ``Key`` may be specified as either ``iolist()`` or
+      ``binary()``, it will be converted into binary before operation
+      execution
  ::
 *MaxNum*
 
@@ -1119,43 +1092,31 @@ brick_simple:delete/4
 Delete key `Key` from the table `Table`. The operation will fail if
 ``Key`` does not already exist
 
-.. erl:function:: delete(Tab, Key)
-.. erl:function:: delete(Tab, Key, Flags)
-.. erl:function:: delete(Tab, Key, Timeout)
-.. erl:function:: delete(Tab, Key, Flags, Timeout)
+.. erl:function:: delete(Table, Key)
+.. erl:function:: delete(Table, Key, Flags)
+.. erl:function:: delete(Table, Key, Timeout)
+.. erl:function:: delete(Table, Key, Flags, Timeout)
 
-  * `Tab = table()`
-  * `table() = atom()`
-
-      :param Table: Name of the table form which to delete the key-value pair
+   :param Table:
+      Name of the table from which to delete the key-value pair
 
       - ``-type table() :: atom()``
 
-   :type Tab: table()
+   :type Table: table()
 
-              *Tab*
-- Name of the table from which to delete the key and its associated
-  value.
-- Mandatory.
-- Type:
-  * `Tab = table()`
-  * `table() = atom()`
+   :param Key:
+      Key to delete from the table
 
- ::
-*Key*
+      - ``-type key() :: iodata()``
+      - ``-type iodata() :: iolist() | binary()``
+      - ``-type iolist(): [char() | binary() | iolist()]``
 
-- Key to delete from the table.
-- Mandatory.
-- Type:
-  * `Key = key()`
-  * `key() = iodata()`
-  * `iodata() = iolist() | binary()`
-  * `iolist()  = [char() | binary() | iolist()]`
-+
-NOTE: While the `Key` may be specified as either `iolist()` or
-`binary()`, it will be converted into binary before operation
-execution.
-+
+   :type Key: key()
+
+   .. note::
+      While the ``Key`` may be specified as either ``iolist()`` or
+      ``binary()``, it will be converted into binary before operation
+      execution
 
  ::
 *Flags*
@@ -1278,20 +1239,17 @@ For further information about micro-transactions, see
 link:hibari-sysadmin-guide.en.html#micro-transactions[Hibari System
 Administrator's Guide, "Micro-Transactions" section].
 
-.. erl:function:: do(Tab, OpList)
-.. erl:function:: do(Tab, OpList, Timeout)
-.. erl:function:: do(Tab, OpList, OpFlags, Timeout)
+.. erl:function:: do(Table, OpList)
+.. erl:function:: do(Table, OpList, Timeout)
+.. erl:function:: do(Table, OpList, OpFlags, Timeout)
 
- ::
-*Tab*
+   :param Table:
+      Name of the table in which to perform the operations
 
-- Name of the table in which to perform the operations.
-- Mandatory.
-- Type:
-  * `Tab = table()`
-  * `table() = atom()`
+      - ``-type table() :: atom()``
 
- ::
+   :type Table: table()
+
 *OpList*
 - List of primitive operations to perform. Each primitive is invoked
   using the `brick_server:make_*()` API.
@@ -1466,19 +1424,17 @@ operations, see http://www.erlang.org/doc/man/lists.html#foldl-3.
    Do not execute this operation while a data migration is being
    performed
 
-.. erl:function:: fold_table(Tab, Fun, Acc, NumItems, Flags)
-.. erl:function:: fold_table(Tab, Fun, Acc, NumItems, Flags, MaxParallel)
-.. erl:function:: fold_table(Tab, Fun, Acc, NumItems, Flags, MaxParallel, Timeout)
+.. erl:function:: fold_table(Table, Fun, Acc, NumItems, Flags)
+.. erl:function:: fold_table(Table, Fun, Acc, NumItems, Flags, MaxParallel)
+.. erl:function:: fold_table(Table, Fun, Acc, NumItems, Flags, MaxParallel, Timeout)
 
-*Tab*
+   :param Table:
+      Name of the table across which to perform the fold operation
 
-- Name of the table across which to perform the fold operation.
-- Mandatory.
-- Type:
-  * `Tab = table()`
-  * `table() = atom()`
+      - ``-type table() :: atom()``
 
- ::
+   :type Table: table()
+
 *Fun*
 
 - Function to apply to successive elements of the list.
@@ -1597,19 +1553,16 @@ this operations, see http://www.erlang.org/doc/man/lists.html#foldl-3.
    Do not execute this operation while a data migration is being
    performed
 
-.. erl:function:: fold_key_prefix(Tab, Prefix, Fun, Acc, Flags)
-.. erl:function:: fold_key_prefix(Tab, Prefix, StartKey, Fun, Acc,
-                  Flags, NumItems, SleepTime, Timeout)
+.. erl:function:: fold_key_prefix(Table, Prefix, Fun, Acc, Flags)
+.. erl:function:: fold_key_prefix(Table, Prefix, StartKey, Fun, Acc, Flags, NumItems, SleepTime, Timeout)
 
-*Tab*
+   :param Table:
+      Name of the table in which to perform the fold operation
 
-- Name of the table in which to perform the fold operation.
-- Mandatory.
-- Type:
-  * `Tab = table()`
-  * `table() = atom()`
+      - ``-type table() :: atom()``
 
- ::
+   :type Table: table()
+
 *Prefix*
 
 - Key prefix for which to perform the fold operation.
