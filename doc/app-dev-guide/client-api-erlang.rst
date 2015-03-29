@@ -95,7 +95,7 @@ if ``Key`` already exists.
 
       - ``-type key() :: iodata()``
       - ``-type iodata() :: iolist() | binary()``
-      - ``-type iolist(): [char() | binary() | iolist()]``
+      - ``-type iolist() :: [char() | binary() | iolist()]``
 
    :type Key: key()
 
@@ -130,8 +130,8 @@ if ``Key`` already exists.
         discouraged due to RAM-based storage
       - **Optional;** defaults to empty list
 
-      - ``-type flags_list(): [do_op_flag() | property()]``
-      - ``-type do_op_flag(): 'value_in_ram'``
+      - ``-type flags_list() :: [do_op_flag() | property()]``
+      - ``-type do_op_flag() :: 'value_in_ram'``
 
         * Store the value blob in RAM, overriding the default storage
           location of the brick
@@ -139,7 +139,7 @@ if ``Key`` already exists.
           .. note::
              ``'value_in_ram'`` flag have not been extensively tested
 
-      - ``-type property(): atom() | {term(), term()}``
+      - ``-type property() :: atom() | {term(), term()}``
 
    :type Flags: flags_list()
 
@@ -147,7 +147,7 @@ if ``Key`` already exists.
 
       - Operation timeout in milliseconds
       - **Optional;** defaults to 15000
-      - ``-type timeout(): integer() | 'infinity'``
+      - ``-type timeout() :: integer() | 'infinity'``
 
    :type Timeout: timeout()
 
@@ -160,7 +160,7 @@ if ``Key`` already exists.
    :rtype: ``{'key_exists', timestamp()}``
 
       - The operation failed because the key already exists.
-      - ``-type timestamp(): integer()``
+      - ``-type timestamp() :: integer()``
 
    :rtype: ``'invalid_flag_present'``
 
@@ -180,7 +180,7 @@ if ``Key`` already exists.
         query after a short delay, on the assumption that the Admin
         Server will have detected the failure and taken steps to
         repair the chain.
-      - ``-type node(): atom()``
+      - ``-type node() :: atom()``
 
 Examples
 ^^^^^^^^
@@ -232,7 +232,7 @@ table ``Table`` if the key already exists. The operation will fail if
 
       - ``-type key() :: iodata()``
       - ``-type iodata() :: iolist() | binary()``
-      - ``-type iolist(): [char() | binary() | iolist()]``
+      - ``-type iolist() :: [char() | binary() | iolist()]``
 
    .. note::
       While the ``Key`` may be specified as either ``iolist()`` or
@@ -265,12 +265,12 @@ table ``Table`` if the key already exists. The operation will fail if
         flags is discouraged due to RAM-based storage
       - **Optional;** defaults to empty list
 
-      - ``-type flags_list(): [do_op_flag() | property()]``
-      - ``-type do_op_flag(): {'testset', timestamp()} | 'value_in_ram'``
+      - ``-type flags_list() :: [do_op_flag() | property()]``
+      - ``-type do_op_flag() :: {'testset', timestamp()} | 'value_in_ram'``
         ``{'exp_time_directive', 'keep' | 'replace'} |``
         ``{'attrib_directive', 'keep' | 'replace'}``
       - ``-type timestamp() = integer()``
-      - ``-type property(): atom() | {term(), term()}``
+      - ``-type property() :: atom() | {term(), term()}``
       - Operational flag usage
 
         * ``{'testset', timestamp()}``
@@ -316,7 +316,7 @@ table ``Table`` if the key already exists. The operation will fail if
 
       - Operation timeout in milliseconds
       - **Optional;** defaults to 15000
-      - ``-type timeout(): integer() | 'infinity'``
+      - ``-type timeout() :: integer() | 'infinity'``
 
    :type Timeout: timeout()
 
@@ -329,7 +329,7 @@ table ``Table`` if the key already exists. The operation will fail if
    :rtype: ``'key_not_exists'``
 
       - The operation failed because the key does not exist
-      - ``-type timestamp(): integer()``
+      - ``-type timestamp() :: integer()``
 
    :rtype: ``{'ts_error', timestamp()}``
 
@@ -357,7 +357,7 @@ table ``Table`` if the key already exists. The operation will fail if
         query after a short delay, on the assumption that the Admin
         Server will have detected the failure and taken steps to
         repair the chain.
-      - ``-type node(): atom()``
+      - ``-type node() :: atom()``
 
 Examples
 ^^^^^^^^
@@ -418,7 +418,7 @@ Set ``Key`` and ``Value`` pair (and optional ``Flags``) in the table
 
       - ``-type key() :: iodata()``
       - ``-type iodata() :: iolist() | binary()``
-      - ``-type iolist(): [char() | binary() | iolist()]``
+      - ``-type iolist() :: [char() | binary() | iolist()]``
 
    :type Key: key()
 
@@ -451,12 +451,12 @@ Set ``Key`` and ``Value`` pair (and optional ``Flags``) in the table
         discouraged due to RAM-based storage
       - **Optional;** defaults to empty list
 
-      - ``-type flags_list(): [do_op_flag() | property()]``
-      - ``-type do_op_flag(): {'testset', timestamp()} | 'value_in_ram'``
-        ``{'exp_time_directive', 'keep' | 'replace'} |``
-        ``{'attrib_directive', 'keep' | 'replace'}``
-      - ``-type timestamp() = integer()``
-      - ``-type property(): atom() | {term(), term()}``
+      - ``-type flags_list() :: [do_op_flag() | property()]``
+      - ``-type do_op_flag() :: {'testset', timestamp()} | 'value_in_ram'``
+        ``| {'exp_time_directive', 'keep' | 'replace'}``
+        ``| {'attrib_directive', 'keep' | 'replace'}``
+      - ``-type timestamp() :: integer()``
+      - ``-type property() :: atom() | {term(), term()}``
       - Operational flag usage
 
         * ``{'testset', timestamp()}``
@@ -504,7 +504,7 @@ Set ``Key`` and ``Value`` pair (and optional ``Flags``) in the table
 
       - Operation timeout in milliseconds
       - **Optional;** defaults to 15000
-      - ``-type timeout(): integer() | 'infinity'``
+      - ``-type timeout() :: integer() | 'infinity'``
 
    :type Timeout: timeout()
 
@@ -518,7 +518,7 @@ Set ``Key`` and ``Value`` pair (and optional ``Flags``) in the table
 
       - The operation failed because the ``{'testset', timestamp()}``
         flag was used and  key does not exist
-      - ``-type timestamp(): integer()``
+      - ``-type timestamp() :: integer()``
 
    :rtype: ``{'ts_error', timestamp()}``
 
@@ -546,7 +546,7 @@ Set ``Key`` and ``Value`` pair (and optional ``Flags``) in the table
         query after a short delay, on the assumption that the Admin
         Server will have detected the failure and taken steps to
         repair the chain.
-      - ``-type node(): atom()``
+      - ``-type node() :: atom()``
 
 Examples
 ^^^^^^^^
@@ -602,7 +602,7 @@ table ``Table`` if the key already exists. The operation will fail if:
 
       - ``-type key() :: iodata()``
       - ``-type iodata() :: iolist() | binary()``
-      - ``-type iolist(): [char() | binary() | iolist()]``
+      - ``-type iolist() :: [char() | binary() | iolist()]``
 
    :type Key: key()
 
@@ -637,12 +637,12 @@ table ``Table`` if the key already exists. The operation will fail if:
         flags is discouraged due to RAM-based storage
       - **Optional;** defaults to empty list
 
-      - ``-type flags_list(): [do_op_flag() | property()]``
-      - ``-type do_op_flag(): {'testset', timestamp()} | 'value_in_ram'``
-        ``{'exp_time_directive', 'keep' | 'replace'} |``
-        ``{'attrib_directive', 'keep' | 'replace'}``
-      - ``-type timestamp() = integer()``
-      - ``-type property(): atom() | {term(), term()}``
+      - ``-type flags_list() :: [do_op_flag() | property()]``
+      - ``-type do_op_flag() :: {'testset', timestamp()} | 'value_in_ram'``
+        ``| {'exp_time_directive', 'keep' | 'replace'}``
+        ``| {'attrib_directive', 'keep' | 'replace'}``
+      - ``-type timestamp() :: integer()``
+      - ``-type property() :: atom() | {term(), term()}``
       - Operational flag usage
 
         * ``{'testset', timestamp()}``
@@ -688,7 +688,7 @@ table ``Table`` if the key already exists. The operation will fail if:
 
       - Operation timeout in milliseconds
       - **Optional;** defaults to 15000
-      - ``-type timeout(): integer() | 'infinity'``
+      - ``-type timeout() :: integer() | 'infinity'``
 
    :type Timeout: timeout()
 
@@ -703,7 +703,7 @@ table ``Table`` if the key already exists. The operation will fail if:
 
       - The operation failed because the key does not exist or because
         key and the new key are equal
-      - ``-type timestamp(): integer()``
+      - ``-type timestamp() :: integer()``
 
    :rtype: ``{'ts_error', timestamp()}``
 
@@ -732,7 +732,7 @@ table ``Table`` if the key already exists. The operation will fail if:
         query after a short delay, on the assumption that the Admin
         Server will have detected the failure and taken steps to
         repair the chain.
-      - ``-type node(): atom()``
+      - ``-type node() :: atom()``
 
 Examples
 ^^^^^^^^
@@ -774,8 +774,8 @@ operation timeout::
 brick_simple:get/4
 ------------------
 
-From table `Table`, retrieve `Key` and specified attributes of the key
-(as determined by `Flags`).
+From table ``Table``, retrieve ``Key`` and specified attributes of the
+key (as determined by ``Flags``).
 
 .. erl:function:: get(Table, Key)
 .. erl:function:: get(Table, Key, Flags)
@@ -794,7 +794,7 @@ From table `Table`, retrieve `Key` and specified attributes of the key
 
       - ``-type key() :: iodata()``
       - ``-type iodata() :: iolist() | binary()``
-      - ``-type iolist(): [char() | binary() | iolist()]``
+      - ``-type iolist() :: [char() | binary() | iolist()]``
 
    :type Key: key()
 
@@ -808,101 +808,124 @@ From table `Table`, retrieve `Key` and specified attributes of the key
       - List of operational flags to apply to the ``get`` operation.
       - **Optional;** defaults to empty list
 
-      - ``-type flags_list(): [do_op_flag()]``
-      - ``-type do_op_flag(): 'get_all_attribs' | 'witness' | {'testset', timestamp()} | 'must_exist' | 'must_not_exist'``
-      - ``-type timestamp() = integer()``
+      - ``-type flags_list() :: [do_op_flag()]``
+      - ``-type do_op_flag() :: 'get_all_attribs' | 'witness'``
+        ``| {'testset', timestamp()}``
+        ``| 'must_exist' | 'must_not_exist'``
+      - ``-type timestamp() :: integer()``
       - Operational flag usage
 
+
+        * ``'get_all_attribs'``
+
+          * Return all attributes of the key. May be used in
+            combination with the ``witness`` flag
+
+        * ``'witness'``
+
+          * Do not return the value blob in the result. This flag will
+            guarantee that the brick does not require disk access to
+            satisfy this request
+
+        * ``{'testset', timestamp()}``
+
+          * Fail the operation if the key's timestamp is not exactly
+            equal to ``timestamp()``. If used inside a
+            link:#brick-simple-do[micro-transaction], abort the
+            transaction if the key's timestamp is not exactly equal to
+            ``timestamp()``.
+          * This flag has priority over the ``'must_exist'`` and
+            ``'must_not_exist'`` flags
+
+        * ``'must_exist'``
+
+          * For use inside a link:#brick-simple-do[micro-transaction]:
+            abort the transaction if the key does not exist
+
+        * ``'must_not_exist'``
+
+          * For use inside a link:#brick-simple-do[micro-transaction]:
+            abort the transaction if the key exists. This flag may be
+            useful when the relationship between two or more keys is
+            important to the client application
+
    :type Flags: flags_list()
-
-
-  * `'get_all_attribs'`
-    ** Return all attributes of the key. May be used in combination
-       with the `witness` flag.
-
-
-
-  * `'witness'`
-    ** Do not return the value blob in the result. This flag will
-       guarantee that the brick does not require disk access to
-       satisfy this request.
-
-
-
-  * `{'testset', timestamp()}`
-    ** Fail the operation if the key's timestamp is not exactly equal
-       to `timestamp()`. If used inside a
-       link:#brick-simple-do[micro-transaction], abort the transaction
-       if the key's timestamp is not exactly equal to `timestamp()`.
-       This flag has priority over the `'must_exist'` and
-       `'must_not_exist'` flags.
-
-
-  * `'must_exist'`
-    ** For use inside a link:#brick-simple-do[micro-transaction]:
-       abort the transaction if the key does not exist.
-
-
-  * `'must_not_exist'`
-    ** For use inside a link:#brick-simple-do[micro-transaction]:
-       abort the transaction if the key exists. This flag may be useful
-       when the relationship between two or more keys is important to
-       the client application.
 
    :param Timeout:
 
       - Operation timeout in milliseconds
       - **Optional;** defaults to 15000
-      - ``-type timeout(): integer() | 'infinity'``
+      - ``-type timeout() :: integer() | 'infinity'``
 
    :type Timeout: timeout()
 
-**Success returns**
+   **Success returns**
 
-- `{'ok', timestamp(), val()}`
-  * Success return when the get request uses neither the `'witness'`
-    flag nor the `'get_all_attribs'` flag.
-  * `timestamp() = integer()`
-  * `val() = iodata()`
-  * `iodata() = iolist() | binary()`
-  * `iolist()  = [char() | binary() | iolist()]`
-- `{'ok', timestamp()}`
-  * Success return when the get uses `'witness'` but not `'get_all_attribs'`.
-- `{'ok', timestamp(), exp_time(), proplist()}`
-  * Success return when the get uses both `'witness'` and `'get_all_attribs'`.
-  * `exp_time() = time_t()`
-  * `proplist() = [property()]`
-  * `property() = atom() | {term(), term()}`
-- `{'ok', timestamp(), val(), exp_time(), proplist()}`
-  * Success return when the get uses `'get_all_attribs'` but not `'witness'`.
-  * `exp_time() = time_t()`
-+
-NOTE: When a `proplist()` is returned, one of the properties in the
-list will always be `{val_len,Size::integer()}`, where `Size` is the
-size of the value blob in bytes.
-+
+   :rtype: ``{'ok', timestamp(), val()}``
 
-**Error returns**
+      - Success return when the get request uses neither the
+        ``'witness'`` flag nor the ``'get_all_attribs'`` flag
+      - ``-type timestamp() :: integer()``
+      - ``-type val() :: iodata()``
+      - ``-type iodata() :: iolist() | binary()``
+      - ``-type iolist()  :: [char() | binary() | iolist()]``
 
-- `'key_not_exist'`
-  * The operation failed because the key does not exist.
-- `{'ts_error', timestamp()}`
-  * The operation failed because the `{'testset', timestamp()}` flag
-    was used and there was a timestamp mismatch. The `timestamp()` in
-    the return is the current value of the existing key's timestamp.
-- `'invalid_flag_present'`
-  * The operation failed because an invalid `do_op_flag()` was found
-    in the `Flags` argument.
-- `'brick_not_available'`
-  * The operation failed because the chain that is responsible for
-    this key is currently length zero and therefore unavailable.
-- `{{'nodedown',node()},{'gen_server','call',term()}}`
-  * The operation failed because the server brick handling the request
-    has crashed or else a network partition has occurred between the
-    client and server. The client should resend the query after a
-    short delay, on the assumption that the Admin Server will have
-    detected the failure and taken steps to repair the chain.
-  * `node() = atom()`
+   :rtype: ``{'ok', timestamp()}``
+
+      - Success return when the get uses ``'witness'`` but not
+        ``'get_all_attribs'``
+
+   :rtype: ``{'ok', timestamp(), exp_time(), proplist()}``
+
+      - Success return when the get uses both ``'witness'`` and
+        ``'get_all_attribs'``
+      - ``-type exp_time() :: time_t()``
+      - ``-type proplist() :: [property()]``
+      - ``-type property() :: atom() | {term(), term()}``
+
+   :rtype: ``{'ok', timestamp(), val(), exp_time(), proplist()}``
+
+      - Success return when the get uses ``'get_all_attribs'`` but not
+        ``'witness'``
+      - ``-type exp_time() :: time_t()``
+
+   .. note::
+      When a ``proplist()`` is returned, one of the properties in the
+      list will always be ``{val_len, Size::integer()}``, where
+      ``Size`` is the size of the value blob in bytes
+
+   **Error returns**
+
+   :rtype: ``'key_not_exist'``
+
+      - The operation failed because the key does not exist.
+
+   :rtype: ``{'ts_error', timestamp()}``
+
+      - The operation failed because the ``{'testset', timestamp()}``
+        flag was used and there was a timestamp mismatch. The
+        ``timestamp()`` in the return is the current value of the
+        existing key's timestamp.
+
+   :rtype: ``'invalid_flag_present'``
+
+      - The operation failed because an invalid ``do_op_flag()`` was
+        found in the ``Flags`` argument
+
+   :rtype: ``'brick_not_available'``
+
+      - The operation failed because the chain that is responsible for
+        this key is currently length zero and therefore unavailable.
+
+   :rtype: ``{{'nodedown',node()},{'gen_server','call',term()}}``
+
+      - The operation failed because the server brick handling the
+        request has crashed or else a network partition has occurred
+        between the client and server. The client should resend the
+        query after a short delay, on the assumption that the Admin
+        Server will have detected the failure and taken steps to
+        repair the chain.
+      - ``-type node() :: atom()``
 
 Examples
 ^^^^^^^^
@@ -958,7 +981,7 @@ results.
 
       - ``-type key() :: iodata()``
       - ``-type iodata() :: iolist() | binary()``
-      - ``-type iolist(): [char() | binary() | iolist()]``
+      - ``-type iolist() :: [char() | binary() | iolist()]``
 
    :type Key: key()
 
@@ -966,13 +989,9 @@ results.
       While the ``Key`` may be specified as either ``iolist()`` or
       ``binary()``, it will be converted into binary before operation
       execution
- ::
-*MaxNum*
 
-- Maximum number of keys to return.
-- Mandatory.
-- Type:
-  * `MaxNum = integer()`
+   :param MaxNum: Maximum number of keys to return
+   :type  MaxNum: integer()
 
    :param Flags:
 
@@ -980,99 +999,113 @@ results.
         operation.
       - **Optional;** defaults to empty list
 
-      - ``-type flags_list(): [do_op_flag()]``
-      - ``-type do_op_flag(): 'get_all_attribs' | 'witness' | {'binary_prefix', binary()} | {'max_bytes', integer()} | {'max_num', integer()}``
-      - ``-type timestamp() = integer()``
-      - ``-type property(): atom() | {term(), term()}``
+      - ``-type flags_list() :: [do_op_flag()]``
+      - ``-type do_op_flag() :: 'get_all_attribs' | 'witness'``
+        ``| {'binary_prefix', binary()}``
+        ``| {'max_bytes', integer()}``
+        ``| {'max_num', integer()}``
+      - ``-type timestamp() :: integer()``
+      - ``-type property() :: atom() | {term(), term()}``
       - Operational flag usage
 
    :type Flags: flags_list()
 
-  * `'get_all_attribs'`
-    ** Return all attributes of each key. May be used in combination
-       with the `witness` flag.
+        * ``'get_all_attribs'``
 
+          * Return all attributes of the key. May be used in
+            combination with the ``witness`` flag
 
+        * ``'witness'``
 
-  * `'witness'`
-    ** Do not return the value blobs in the result. This flag will
-       guarantee that the brick does not require disk access to
-       satisfy this request.
+          * Do not return the value blob in the result. This flag will
+            guarantee that the brick does not require disk access to
+            satisfy this request
 
+        * ``{'binary_prefix', binary()}``
 
+          * Return only keys that have a binary prefix that is exactly
+            equal to ``binary()``
 
-  * `{'binary_prefix', binary()}`
-    ** Return only keys that have a binary prefix that is exactly
-       equal to `binary()`.
+        * ``{'max_bytes', integer()}``
 
+          * Return only as many keys as the sum of the sizes of their
+            corresponding value blobs does not exceed ``integer()``
+            bytes. If this flag is not explicity specified in a client
+            request, the value defaults to 2GB
 
+        * ``{'max_num', integer()}``
 
-  * `{'max_bytes', integer()}`
-    ** Return only as many keys as the sum of the sizes of their
-       corresponding value blobs does not exceed `integer()` bytes.
-       If this flag is not explicity specified in a client request,
-       the value defaults to 2GB.
-
-
-  * `{'max_num', integer()}`
-    ** Maxinum number of keys to return. Defaults to 10. Note: This
-       flag is duplicative of the MaxNum argument in purpose.
+          * Maxinum number of keys to return. Defaults to 10. Note:
+            This flag is duplicative of the MaxNum argument in
+            purpose
 
    :param Timeout:
 
       - Operation timeout in milliseconds
       - **Optional;** defaults to 15000
-      - ``-type timeout(): integer() | 'infinity'``
+      - ``-type timeout() :: integer() | 'infinity'``
 
    :type Timeout: timeout()
 
-**Success returns**
+   **Success returns**
 
-- `{ok, {[{key(), timestamp(), val()}], boolean()}}`
-  * Success return when the `get_many` request uses neither the
-    `'witness'` flag nor the `'get_all_attribs'` flag.
-  * `timestamp() = integer()`
-  * `val() = iodata()`
-  * `iodata() = iolist() | binary()`
-  * `iolist()  = [char() | binary() | iolist()]`
-- `{ok, {[{key(), timestamp()}], boolean()}}`
-  * Success return when the `get_many` uses `'witness'` but not
-    `'get_all_attribs'`.
-- `{ok, {[{key(), timestamp(), exp_time(), proplist()}], boolean()}}`
-  * Success return when the `get_many` uses both `'witness'` and
-    `'get_all_attribs'`.
-  * `exp_time() = time_t()`
-  * `proplist() = [property()]`
-  * `property() = atom() | {term(), term()}`
-- `{ok, {[{key(), timestamp(), val(), exp_time(), proplist()}],
-  boolean()}}`
-  * Success return when the `get_many` uses `'get_all_attribs'` but
-    not `'witness'`.
-  * `exp_time() = time_t()`
+   :rtype: ``{ok, {[{key(), timestamp(), val()}], boolean()}}``
 
-.. note::
-   The boolean at the end of the success return indicates whether or
-   not the chain has more keys lexicographically after the last key in
-   the return (``true`` for yes, ``false`` for no). When a
-   ``proplist()`` is returned, one of the properties in the list will
-   always be ``{val_len, Size::integer()}``, where ``Size`` is the
-   size of the value blob in bytes.
+      - Success return when the ``get_many`` request uses neither the
+        ``'witness'`` flag nor the ``'get_all_attribs'`` flag
+      - ``-type timestamp() :: integer()``
+      - ``-type val() :: iodata()``
+      - ``-type iodata() :: iolist() | binary()``
+      - ``iolist() :: [char() | binary() | iolist()]``
 
-**Error returns**
+   :rtype: ``{ok, {[{key(), timestamp()}], boolean()}}``
 
-- `'invalid_flag_present'`
-  * The operation failed because an invalid `do_op_flag()` was found
-    in the `Flags` argument.
-- `'brick_not_available'`
-  * The operation failed because the chain that is responsible for
-    this key is currently length zero and therefore unavailable.
-- `{{'nodedown',node()},{'gen_server','call',term()}}`
-  * The operation failed because the server brick handling the request
-    has crashed or else a network partition has occurred between the
-    client and server. The client should resend the query after a
-    short delay, on the assumption that the Admin Server will have
-    detected the failure and taken steps to repair the chain.
-  * `node() = atom()`
+      - Success return when the ``get_many`` uses ``'witness'`` but
+        not ``'get_all_attribs'``
+
+   :rtype: ``{ok, {[{key(), timestamp(), exp_time(), proplist()}], boolean()}}``
+
+      - Success return when the ``get_many`` uses both ``'witness'``
+        and ``'get_all_attribs'``
+      - ``-type exp_time() :: time_t()``
+      - ``-type proplist() :: [property()]``
+      - ``property() :: atom() | {term(), term()}``
+
+   :trype: ``{ok, {[{key(), timestamp(), val(), exp_time(), proplist()}], boolean()}}``
+
+      - Success return when the ``get_many`` uses
+        ``'get_all_attribs'`` but not ``'witness'``
+      - ``exp_time() :: time_t()``
+
+   .. note::
+      The boolean at the end of the success return indicates whether
+      or not the chain has more keys lexicographically after the last
+      key in the return (``true`` for yes, ``false`` for no). When a
+      ``proplist()`` is returned, one of the properties in the list
+      will always be ``{val_len, Size::integer()}``, where ``Size`` is
+      the size of the value blob in bytes.
+
+   **Error returns**
+
+   :rtype: ``'invalid_flag_present'``
+
+      - The operation failed because an invalid ``do_op_flag()`` was
+        found in the ``Flags`` argument.
+
+   :rtype: ``'brick_not_available'``
+
+      - The operation failed because the chain that is responsible for
+        this key is currently length zero and therefore unavailable.
+
+   :rtype: ``{{'nodedown',node()},{'gen_server','call',term()}}``
+
+      - The operation failed because the server brick handling the
+        request has crashed or else a network partition has occurred
+        between the client and server. The client should resend the
+        query after a short delay, on the assumption that the Admin
+        Server will have detected the failure and taken steps to
+        repair the chain.
+      - ``-type node() :: atom()``
 
 Examples
 ^^^^^^^^
@@ -1125,7 +1158,7 @@ Delete key `Key` from the table `Table`. The operation will fail if
 
       - ``-type key() :: iodata()``
       - ``-type iodata() :: iolist() | binary()``
-      - ``-type iolist(): [char() | binary() | iolist()]``
+      - ``-type iolist() :: [char() | binary() | iolist()]``
 
    :type Key: key()
 
@@ -1140,67 +1173,80 @@ Delete key `Key` from the table `Table`. The operation will fail if
         operation.
       - **Optional;** defaults to empty list
 
-      - ``-type flags_list(): [do_op_flag()]``
-      - ``-type do_op_flag(): {'testset', timestamp()} | 'must_exist' | 'must_not_exist'``
-      - ``-type timestamp() = integer()``
+      - ``-type flags_list() :: [do_op_flag()]``
+      - ``-type do_op_flag() :: {'testset', timestamp()}``
+        ``| 'must_exist' | 'must_not_exist'``
+      - ``-type timestamp() :: integer()``
       - Operational flag usage
 
+        * ``{'testset', timestamp()}``
+
+          * Fail the operation if the existing key's timestamp is not
+            exactly equal to ``timestamp()``.  If used inside a
+            link:#brick-simple-do[micro-transaction], abort the
+            transaction if the key's timestamp is not exactly equal to
+            ``timestamp()``. This flag has priority over the
+            ``'must_exist'`` and ``'must_not_exist'`` flags
+
+        * ``'must_exist'``
+
+          * For use inside a link:#brick-simple-do[micro-transaction]:
+            abort the transaction if the key does not exist
+
+        * ``'must_not_exist'``
+
+          * For use inside a link:#brick-simple-do[micro-transaction]:
+            abort the transaction if the key exists. This flag may be
+            useful when the relationship between two or more keys is
+            important to the client application
+
    :type Flags: flags_list()
-
-  * `{'testset', timestamp()}`
-    ** Fail the operation if the existing key's timestamp is not
-       exactly equal to `timestamp()`.  If used inside a
-       link:#brick-simple-do[micro-transaction], abort the transaction
-       if the key's timestamp is not exactly equal to
-       `timestamp()`. This flag has priority over the `'must_exist'` and
-       `'must_not_exist'` flags
-
-
-  * `'must_exist'`
-    ** For use inside a link:#brick-simple-do[micro-transaction]:
-       abort the transaction if the key does not exist.
-
-
-  * `'must_not_exist'`
-    ** For use inside a link:#brick-simple-do[micro-transaction]:
-       abort the transaction if the key exists. This flag may be useful
-       when the relationship between two or more keys is important to
-       the client application.
 
    :param Timeout:
 
       - Operation timeout in milliseconds
       - **Optional;** defaults to 15000
-      - ``-type timeout(): integer() | 'infinity'``
+      - ``-type timeout() :: integer() | 'infinity'``
 
    :type Timeout: timeout()
 
-**Success return**
+   **Success return**
 
-- `'ok'`
+   :rtype: ``'ok'``
 
-**Error returns**
+   **Error returns**
 
-- `'key_not_exist'`
-  * The operation failed because the key does not exist.
-- `{'ts_error', timestamp()}`
-  * The operation failed because the `{'testset', timestamp()}` flag
-    was used and there was a timestamp mismatch. The `timestamp()` in
-    the return is the current value of the existing key's timestamp.
-  * `timestamp() = integer()`
-- `'invalid_flag_present'`
-  * The operation failed because an invalid `do_op_flag()` was found
-    in the `Flags` argument.
-- `'brick_not_available'`
-  * The operation failed because the chain that is responsible for
-    this key is currently length zero and therefore unavailable.
-- `{{'nodedown',node()},{'gen_server','call',term()}}`
-  * The operation failed because the server brick handling the request
-    has crashed or else a network partition has occurred between the
-    client and server. The client should resend the query after a
-    short delay, on the assumption that the Admin Server will have
-    detected the failure and taken steps to repair the chain.
-  * `node() = atom()`
+   :rtype: ``'key_not_exist'``
+
+      - The operation failed because the key does not exist
+
+   :rtype: ``{'ts_error', timestamp()}``
+
+      - The operation failed because the ``{'testset', timestamp()}``
+        flag was used and there was a timestamp mismatch. The
+        ``timestamp()`` in the return is the current value of the
+        existing key's timestamp.
+      - ``timestamp() = integer()``
+
+   :rtype: ``'invalid_flag_present'``
+
+      - The operation failed because an invalid ``do_op_flag()`` was
+        found in the ``Flags`` argument.
+
+   :rtype: ``'brick_not_available'``
+
+      - The operation failed because the chain that is responsible for
+        this key is currently length zero and therefore unavailable.
+
+   :rtype: ``{{'nodedown',node()},{'gen_server','call',term()}}``
+
+      - The operation failed because the server brick handling the
+        request has crashed or else a network partition has occurred
+        between the client and server. The client should resend the
+        query after a short delay, on the assumption that the Admin
+        Server will have detected the failure and taken steps to
+        repair the chain.
+      - ``-type node() :: atom()``
 
 Examples
 ^^^^^^^^
@@ -1267,42 +1313,45 @@ Administrator's Guide, "Micro-Transactions" section].
 
    :type Table: table()
 
-*OpList*
-- List of primitive operations to perform. Each primitive is invoked
-  using the `brick_server:make_*()` API.
-- Mandatory.
-- Type:
-  * `OpList = do_op_list()`
-  * `do_op_list() = [do1_op()]`
-  * `do1_op() =`
-    ** `brick_server:make_add(Key, Value, ExpTime, Flags)`
-    ** `brick_server:make_replace(Key, Value, ExpTime, Flags)`
-    ** `brick_server:make_set(Key, Value, ExpTime, Flags)`
-    ** `brick_server:make_rename(Key, NewKey, ExpTime, Flags)`
-    ** `brick_server:make_get(Key, Flags)`
-    ** `brick_server:make_get_many(Key, Flags)`
-    ** `brick_server:make_delete(Key, Flags)`
-    ** `brick_server:make_txn()`
-       *** Include `brick_server:make_txn()` as the first item in your
-           `OpList` if you want the `do` operation to be executed as
-           an atomic transaction.
-    ** Note that the arguments for each primitive are the same as
-       those for the primitives when they are executed on their own,
-       with the exclusion of the `Tab` and `Timeout` arguments, both
-       of which serve as arguments to the overall `do` operation
-       rather than as arguments to the primitives. For example, an
-       `add` on its own is `brick_simple:add(Tab, Key, Value, ExpTime,
-       Flags, Timeout)`, whereas in the context of a `do` operation an
-       `add` primitive is `brick_server:make_add(Key, Value, ExpTime,
-       Flags)`.
-    ** For further information about each primitive, see
-       link:#brick-simple-add[brick_simple:add/6],
-       link:#brick-simple-replace[brick_simple:replace/6],
-       link:#brick-simple-set[brick_simple:set/6],
-       link:#brick-simple-rename[brick_simple:rename/6],
-       link:#brick-simple-get[brick_simple:get/4],
-       link:#brick-simple-get-many[brick_simple:get_many/5], and
-       link:#brick-simple-delete[brick_simple:delete/4].
+   :param OpList:
+
+      - List of primitive operations to perform. Each primitive is
+        invoked using the ``brick_server:make_*()`` API
+      - ``-type do_op_list() :: [do1_op()]``
+      - ``-type do1_op() ::``
+
+        * ``brick_server:make_add(Key, Value, ExpTime, Flags)``
+        * ``brick_server:make_replace(Key, Value, ExpTime, Flags)``
+        * ``brick_server:make_set(Key, Value, ExpTime, Flags)``
+        * ``brick_server:make_rename(Key, NewKey, ExpTime, Flags)``
+        * ``brick_server:make_get(Key, Flags)``
+        * ``brick_server:make_get_many(Key, Flags)``
+        * ``brick_server:make_delete(Key, Flags)``
+        * ``brick_server:make_txn()``
+
+          * Include ``brick_server:make_txn()`` as the first item in
+            your ``OpList`` if you want the ``do`` operation to be
+            executed as an atomic transaction
+          * Note that the arguments for each primitive are the same as
+            those for the primitives when they are executed on their
+            own, with the exclusion of the ``Tab`` and ``Timeout``
+            arguments, both of which serve as arguments to the overall
+            ``do`` operation rather than as arguments to the
+            primitives. For example, an ``add`` on its own is
+            ``brick_simple:add(Tab, Key, Value, ExpTime, Flags,
+            Timeout)``, whereas in the context of a ``do`` operation
+            an ``add`` primitive is ``brick_server:make_add(Key,
+            Value, ExpTime, Flags)``
+          * For further information about each primitive, see
+            link:#brick-simple-add[brick_simple:add/6],
+            link:#brick-simple-replace[brick_simple:replace/6],
+            link:#brick-simple-set[brick_simple:set/6],
+            link:#brick-simple-rename[brick_simple:rename/6],
+            link:#brick-simple-get[brick_simple:get/4],
+            link:#brick-simple-get-many[brick_simple:get_many/5], and
+            link:#brick-simple-delete[brick_simple:delete/4]
+
+   :type OpList: do_op_list()
 
    :param OpFlags:
 
@@ -1310,93 +1359,108 @@ Administrator's Guide, "Micro-Transactions" section].
         operation.
       - **Optional;** defaults to empty list
 
-      - ``-type do_flags_list(): [do_flag()]``
-      - ``-type do_flag(): 'fail_if_wrong_role' | 'ignore_role'``
+      - ``-type do_flags_list() :: [do_flag()]``
+      - ``-type do_flag() :: 'fail_if_wrong_role' | 'ignore_role'``
       - Operational flag usage
 
+        * ``'fail_if_wrong_role'``
+
+          * If the 'do' operation is sent to the wrong brick in the
+            target  chain (e.g. a 'read' request mistakenly sent to
+            the 'head' brick or a 'write' request mistakenly sent to
+            the 'tail' brick), fail the transaction immediately. If
+            this flag is not used, the default behavior is for the
+            incorrect brick to forward the request to the correct
+            brick
+
+        * ``'ignore_role'``
+
+          * If this flag is used, then whichever brick receives the
+            request  will reply to the request directly, regardless of
+            the brick's assigned role
+
    :type OpFlags: do_flags_list()
-
-
-   * `'fail_if_wrong_role'`
-    ** If the 'do' operation is sent to the wrong brick in the target
-       chain (e.g. a 'read' request mistakenly sent to the 'head' brick or
-       a 'write' request mistakenly sent to the 'tail' brick), fail the
-       transaction immediately. If this flag is not used, the default
-       behavior is for the incorrect brick to forward the request to the
-       correct brick.
-
-
-   * `'ignore_role'`
-    ** If this flag is used, then whichever brick receives the request
-       will reply to the request directly, regardless of the brick's assigned
-       role.
 
    :param Timeout:
 
       - Operation timeout in milliseconds
       - **Optional;** defaults to 15000
-      - ``-type timeout(): integer() | 'infinity'``
+      - ``-type timeout() :: integer() | 'infinity'``
 
    :type Timeout: timeout()
 
-**Success return**
+   **Success return**
 
-- `[do1_res_ok]`
-  * List of `do1_res_ok`, one for each primitive operation specified
-    in the `do` request. Return list order corresponds to the order in
-    which primitive operations are listed in the request's
-    `OpList`. Note that if the `do` request does not use transaction
-    semantics, then some individual primitive operations may fail
-    without the overall `do` operation failing.
-  * Within the return list, possible `do1_res_ok` returns to each
-    individual primitive operation are the same as the possible
-    returns that the primitive operation type could generate if it
-    were executed on its own. For example, within the `do` operation's
-    success return list, the possible returns for a primitive `add`
-    operation are the same as the returns described in the
-    link:#brick-simple-add[brick_simple:add/6] section; potential
-    returns to a primitive `replace` operation are the same as those
-    described in the
-    link:#brick-simple-replace[brick_simple:replace/6] section; and
-    likewise for link:#brick-simple-set[set],
-    likewise for link:#brick-simple-rename[rename],
-    link:#brick-simple-get[get],
-    link:#brick-simple-get-many[get_many], and
-    link:#brick-simple-delete[delete].
+   :rtype: ``[do1_res_ok]``
 
-**Error returns**
+      - List of ``do1_res_ok``, one for each primitive operation
+        specified in the ``do`` request. Return list order corresponds
+        to the order in which primitive operations are listed in the
+        request's ``OpList``. Note that if the ``do`` request does not
+        use transaction semantics, then some individual primitive
+        operations may fail without the overall ``do`` operation
+        failing
+      - Within the return list, possible ``do1_res_ok`` returns to
+        each individual primitive operation are the same as the
+        possible returns that the primitive operation type could
+        generate if it were executed on its own. For example, within
+        the ``do`` operation's success return list, the possible
+        returns for a primitive ``add`` operation are the same as the
+        returns described in the
+        link:#brick-simple-add[brick_simple:add/6] section; potential
+        returns to a primitive ``replace`` operation are the same as
+        those described in the
+        link:#brick-simple-replace[brick_simple:replace/6] section; and
+        likewise for link:#brick-simple-set[set],
+        likewise for link:#brick-simple-rename[rename],
+        link:#brick-simple-get[get],
+        link:#brick-simple-get-many[get_many], and
+        link:#brick-simple-delete[delete].
 
-- `{txn_fail, [{integer(), do1_res_fail()}]}`
-  * Operation failed because transaction semantics were used in the
-    `do` request and one or more primitive operations within the
-    transaction failed. The `integer()` identifies the failed
-    primitive operation by its position within the request's
-    `OpList`. For example, a 2 indicates that the second primitive
-    listed in the request's `OpList` failed. Note that this position
-    identifier does not count the `txn()` specifier at the start of
-    the `OpList`.
-  * `do1_res_fail()` indicates the type of failure for the failed
-    primitive operation. Possibilities are:
-    ** `{'key_exists', timestamp()}`
-       *** `timestamp() = integer()`
-    ** `'key_not_exist'`
-    ** `{'ts_error', timestamp()}`
-    ** `'invalid_flag_present'`
-- `'invalid_flag_present'`
-  * The operation failed because an invalid `do_flag()` was found in
-    the `do` request's `OpFlags` argument. Note this is a different
-    error than an invalid flag being found within an individual
-    primitive.
-- `'brick_not_available'`
-  * The operation failed because the chain that is responsible for
-    this key is currently length zero and therefore unavailable.
-- `{{'nodedown',node()},{'gen_server','call',term()}}`
-  * The operation failed because the server brick handling the request
-    has crashed or else a network partition has occurred between the
-    client and server. The client should resend the query after a
-    short delay, on the assumption that the Admin Server will have
-    detected the failure and taken steps to repair the chain.
-  * `node() = atom()`
+   **Error returns**
+
+   :rtype: ``{txn_fail, [{integer(), do1_res_fail()}]}``
+
+      - Operation failed because transaction semantics were used in
+        the ``do`` request and one or more primitive operations within
+        the transaction failed. The ``integer()`` identifies the
+        failed primitive operation by its position within the
+        request's ``OpList``. For example, a 2 indicates that the
+        second primitive listed in the request's ``OpList``
+        failed. Note that this position identifier does not count the
+        ``txn()`` specifier at the start of  the ``OpList``.
+      - ``do1_res_fail()`` indicates the type of failure for the
+        failed primitive operation. Possibilities are:
+
+        * ``{'key_exists', timestamp()}``
+
+          * ``-type timestamp() :: integer()``
+
+        * ``'key_not_exist'``
+        * ``{'ts_error', timestamp()}``
+        * ``'invalid_flag_present'``
+
+   :rtype: ``'invalid_flag_present'``
+
+      - The operation failed because an invalid ``do_flag()`` was
+        found in the ``do`` request's ``OpFlags`` argument. Note this
+        is a different error than an invalid flag being found within
+        an individual primitive
+
+   :rtype: ``'brick_not_available'``
+
+      - The operation failed because the chain that is responsible for
+        this key is currently length zero and therefore unavailable
+
+   :rtype: ``{{'nodedown',node()},{'gen_server','call',term()}}``
+
+      - The operation failed because the server brick handling the
+        request has crashed or else a network partition has occurred
+        between the client and server. The client should resend the
+        query after a short delay, on the assumption that the Admin
+        Server will have detected the failure and taken steps to
+        repair the chain
+      - ``-type node() :: atom()``
 
 Examples
 ^^^^^^^^
@@ -1452,120 +1516,99 @@ operations, see http://www.erlang.org/doc/man/lists.html#foldl-3.
 
    :type Table: table()
 
-*Fun*
+   :param Fun:
+      Function to apply to successive elements of the list
 
-- Function to apply to successive elements of the list.
-- Mandatory.
-- Type:
-  * `Fun  = fun_arity_2()`
-  * `fun_arity_2()` arguments =
-   ** `{ChainName, Tuple_from_get_many}`
-     *** `Tuple_From_get_many` is a single result tuple from a
-         link:#brick-simple-get-many[brick_simple:get_many()]
-         result. Its format can vary according to the `Flags`
-         argument, which is passed as-is to a `get_many()` call. For
-         example, if `Flags` = `[]`, then `Tuple_From_get_many` will
-         match `{Key, TS, Value}`. If `Flags` = `[witness]`, then
-         `Tuple_From_get_many` will match `{Key, TS}`.
-   ** `Acc`
-     *** The accumulator term.
+      - ``-type fun_arity_2() :: fun(({ChainName, TupleFromGetMany}, Acc) -> Acc)``
 
- ::
-*Acc*
+        * ``TupleFromGetMany`` is a single result tuple from a
+          link:#brick-simple-get-many[brick_simple:get_many()]
+          result. Its format can vary according to the ``Flags``
+          argument, which is passed as-is to a ``get_many()`` call. For
+          example, if ``Flags`` = ``[]``, then ``TupleFromGetMany``
+          will match ``{Key, TS, Value}``. If ``Flags`` = ``[witness]``,
+          then ``TupleFromGetMany`` will match ``{Key, TS}``
 
-- Initial value of the accumulator term.
-- Mandatory.
-- Type:
-  * `Acc  = term()`
+      - ``Acc``
 
- ::
-*NumItems*
+        * The accumulator term
 
-- Batch size used for `get_many` operations used by the fold function.
-- Mandatory.
-- Type:
-  * `NumItems  = integer()`
+   :type Fun: fun_arity_2()
+
+   :param Acc: Initial value of the accumulator term
+   :type Acc:  term()
+
+   :param NumItems:
+      Batch size used for ``get_many`` operations used by the fold
+      function
+
+   :type NumItems: integer()
 
    :param Flags:
 
+      - List of operational flags to apply to the ``fold_table``
+        operation, The supported flags are the same as those for
+        link:#brick-simple-get-many[brick_simple:get_many()]
 
-******************TODO*********************
-
-      - List of operational flags to apply to the ``rename``
-        operation, and/or custom property flags to associate with the
-        key-value pair in the database. Heavy use of custom property
-        flags is discouraged due to RAM-based storage
-      - **Optional;** defaults to empty list
-
-      - ``-type flags_list(): [do_op_flag() | property()]``
-      - ``-type do_op_flag(): {'testset', timestamp()} | 'value_in_ram'``
-        ``{'exp_time_directive', 'keep' | 'replace'} |``
-        ``{'attrib_directive', 'keep' | 'replace'}``
-      - ``-type timestamp() = integer()``
-      - ``-type property(): atom() | {term(), term()}``
+      - ``-type flags_list() :: [do_op_flag() | property()]``
+      - ``-type do_op_flag() :: 'get_all_attribs' | 'witness'``
+        ``{'binary_prefix', binary()} |``
+        ``{'max_bytes', integer()}``
+      - ``-type property() :: atom() | {term(), term()}``
       - Operational flag usage
+
+        * ``'get_all_attribs'``
+
+          * Return all attributes of each key. May be used in
+            combination with the ``witness`` flag
+
+       * ``'witness'``
+
+         * Do not return the value blobs in the result. This flag will
+           guarantee that the brick does not require disk access to
+           satisfy this request
+
+       * ``{'binary_prefix', binary()}``
+
+         * Return only keys that have a binary prefix that is exactly
+           equal to ``binary()``
+
+       * ``{'max_bytes', integer()}``
+
+         * Return only as many keys as the sum of the sizes of their
+           corresponding value blobs does not exceed ``integer()``
+           bytes
 
    :type Flags: flags_list()
 
+   :param MaxParallel:
 
-*Flags*
-- List of operational flags to apply to the `fold_table'
-  operation. The supported flags are the same as those for
-  link:#brick-simple-get-many[brick_simple:get_many()].
-- Mandatory.
-- Type:
-  * `Flags = flags_list()`
-  * `flags_list() = [do_op_flag() | property()]`
-  * `do_op_flag() = 'get_all_attribs' | 'witness' | {'binary_prefix',
-    binary()} | {'max_bytes', integer()}`
-  * `property() = atom() | {term(), term()}`
-- Operational flag usage
-  * `'get_all_attribs'`
-    ** Return all attributes of each key. May be used in combination
-       with the `witness` flag.
-  * `'witness'`
-    ** Do not return the value blobs in the result. This flag will
-       guarantee that the brick does not require disk access to
-       satisfy this request.
-  * `{'binary_prefix', binary()}`
-    ** Return only keys that have a binary prefix that is exactly
-       equal to `binary()`.
-  * `{'max_bytes', integer()}`
-    ** Return only as many keys as the sum of the sizes of their
-       corresponding value blobs does not exceed `integer()` bytes.
+      - If ``MaxParallel`` = 0, a true fold will be performed. If
+        ``MaxParallel`` >= 1, then an independent fold will be
+        performed on each chain, with up to ``MaxParallel`` number of
+        folds running in parallel. The result from each chain fold
+        will be returned to the caller as-is, i.e. will **not** be
+        combined like in a "reduce" phase of a map-reduce cycle
+      - Optional; defaults to 0
 
- ::
-*MaxParallel*
-- If `MaxParallel` = 0, a true fold will be performed. If
-  `MaxParallel` >= 1, then an independent fold will be performed on
-  each chain, with up to `MaxParallel` number of folds running in
-  parallel. The result from each chain fold will be returned to the
-  caller as-is, i.e. will *not* be combined like in a "reduce" phase
-  of a map-reduce cycle.
-- Optional; defaults to 0.
-- Type:
-  * `MaxParallel = integer()`
+   :type MaxParallel: integer()
 
    :param Timeout:
 
       - Operation timeout in milliseconds
       - **Optional;** defaults to 15000
-      - ``-type timeout(): integer() | 'infinity'``
+      - ``-type timeout() :: integer() | 'infinity'``
 
    :type Timeout: timeout()
 
-**Success return**
+   **Success return**
 
-- `{ok, Acc, Iterations}`
-  * `Acc = term()`
-  * `Iterations = integer()`
+   :rtype: ``{ok, Acc::term(), Iterations::integer()}``
 
-**Error return**
+   **Error return**
 
-- `{error, GdssError, Acc, Iterations}`
-  * `GdssError = term()`
-  * `Acc = term()`
-  * `Iterations = integer()`
+   :rtype: ``{error, Error::term(), Acc::term(), Iterations::integer()}``
+
 
 Examples
 ^^^^^^^^
@@ -1596,127 +1639,98 @@ this operations, see http://www.erlang.org/doc/man/lists.html#foldl-3.
 
    :type Table: table()
 
-*Prefix*
+   :param Prefix: Key prefix for which to perform the fold operation
+   :type  Prefix: binary()
 
-- Key prefix for which to perform the fold operation.
-- Mandatory.
-- Type:
-  * `Prefix = binary()`
+   :param StartKey:
 
- ::
-*StartKey*
+      - Key at which to initiate the fold operation
+      - Optional; defaults to equal your specified ``Prefix``
 
-- Key at which to initiate the fold operation.
-- Optional; defaults to equal your specified `Prefix`.
-- Type:
-  * `StartKey = binary()`
+   :type StartKey: binary()
 
- ::
-*Fun*
+   :param Fun:
+      Function to apply to successive elements of the list
 
-- Function to apply to successive elements of the list.
-- Mandatory.
-- Type:
-  * `Fun  = fun_arity_2()`
-  * `fun_arity_2()` arguments =
-   ** `Tuple_from_get_many`
-     *** `Tuple_From_get_many` is a single result tuple from a
-         link:#brick-simple-get-many[brick_simple:get_many()]
-         result. Its format can vary according to the `Flags0`
-         argument, which is passed as-is to a `get_many()` call. For
-         example, if `Flags0` = `[]`, then `Tuple_From_get_many` will
-         match `{Key, TS, Value}`. If `Flags0` = `[witness]`, then
-         `Tuple_From_get_many` will match `{Key, TS}`.
-   ** `UserAccumulatorTerm`
-     *** _description to be added_
+      - ``-type fun_arity_2() :: fun(({ChainName, TupleFromGetMany}, Acc) -> Acc)``
 
- ::
-*Acc*
+        * ``TupleFromGetMany`` is a single result tuple from a
+          link:#brick-simple-get-many[brick_simple:get_many()]
+          result. Its format can vary according to the ``Flags``
+          argument, which is passed as-is to a ``get_many()`` call. For
+          example, if ``Flags`` = ``[]``, then ``TupleFromGetMany``
+          will match ``{Key, TS, Value}``. If ``Flags`` = ``[witness]``,
+          then ``TupleFromGetMany`` will match ``{Key, TS}``
 
-- _description to be added_.
-- Mandatory.
-- Type:
-  * `Acc  = term()`
+      - ``Acc``
+
+        * The accumulator term
+
+   :type Fun: fun_arity_2()
+
+   :param Acc: Initial value of the accumulator term
+   :type Acc:  term()
 
    :param Flags:
 
-      - List of operational flags to apply to the ``rename``
-        operation, and/or custom property flags to associate with the
-        key-value pair in the database. Heavy use of custom property
-        flags is discouraged due to RAM-based storage
-      - **Optional;** defaults to empty list
-
-      - ``-type flags_list(): [do_op_flag() | property()]``
-      - ``-type do_op_flag(): {'testset', timestamp()} | 'value_in_ram'``
-        ``{'exp_time_directive', 'keep' | 'replace'} |``
-        ``{'attrib_directive', 'keep' | 'replace'}``
-      - ``-type timestamp() = integer()``
-      - ``-type property(): atom() | {term(), term()}``
+      - List of operational flags to apply to the ``fold_key_prefix``
+        operation. The supported flags are the same as those for
+        link:#brick-simple-get-many[brick_simple:get_many()],
+        excluding the ``{'binary_prefix', binary()}`` flag. This flag
+        is inappropriate since the key prefix is passed directly
+        through the ``Prefix`` argument of
+        ``brick_simple:fold_key_prefix()``
+      - ``-type flags_list() :: ['get_all_attribs' | 'witness'``
+        ``| {'max_bytes', integer()}]``
       - Operational flag usage
 
+          * ``'get_all_attribs'``
+
+            * Return all attributes of each key. May be used in
+              combination with the ``witness`` flag
+
+          * ``'witness'``
+
+            * Do not return the value blobs in the result. This flag
+              will guarantee that the brick does not require disk
+              access to satisfy this request
+
+          * ``{'max_bytes', integer()}``
+
+            * Return only as many keys as the sum of the sizes of
+              their corresponding value blobs does not exceed
+              ``integer()`` bytes
 
    :type Flags: flags_list()
 
- ::
-*Flags0*
+   :param NumItems:
+      Batch size used for ``get_many`` operations used by the fold
+      function
 
-- List of operational flags to apply to the `fold_key_prefix`
-  operation. The supported flags are the same as those for
-  link:#brick-simple-get-many[brick_simple:get_many()], excluding the
-  `{'binary_prefix', binary()}` flag. This flag is inappropriate since
-  the key prefix is passed directly through the `Prefix` argument of
-  `brick_simple:fold_key_prefix()`.
-- Mandatory.
-- Type:
-  * `Flags0 = 'get_all_attribs' | 'witness' | {'max_bytes', integer()}`
-- Operational flag usage
-  * `'get_all_attribs'`
-    ** Return all attributes of each key. May be used in combination
-       with the `witness` flag.
-  * `'witness'`
-    ** Do not return the value blobs in the result. This flag will
-       guarantee that the brick does not require disk access to
-       satisfy this request.
-  * `{'max_bytes', integer()}`
-    ** Return only as many keys as the sum of the sizes of their
-       corresponding value blobs does not exceed `integer()` bytes.
+   :type NumItems: integer()
 
- ::
-*NumItems*
+   :param SleepTime:
 
-- _description to be added_.
-- Optional; defaults to 100.
-- Type:
-  * `NumItems  = integer()`
+      - Sleep time between interations, in milliseconds
+      - Optional; defaults to 0
 
- ::
-*SleepTime*
-
-- Sleep time between interations, in milliseconds.
-- Optional; defaults to 0.
-- Type:
-  * `SleepTime = integer()`
+   :type SleepTime: integer()
 
    :param Timeout:
 
       - Operation timeout in milliseconds
       - **Optional;** defaults to 15000
-      - ``-type timeout(): integer() | 'infinity'``
+      - ``-type timeout() :: integer() | 'infinity'``
 
    :type Timeout: timeout()
 
-**Success return**
+   **Success return**
 
-- `{ok, Acc, Iterations}`
-  * `Acc = term()`
-  * `Iterations = integer()`
+   :rtype: ``{ok, Acc::term(), Iterations::integer()}``
 
-**Error return**
+   **Error return**
 
-- `{error, GdssError, Acc, Iterations}`
-  * `GdssError = term()`
-  * `Acc = term()`
-  * `Iterations = integer()`
+   :rtype: ``{error, Error::term(), Acc::term(), Iterations::integer()}``
 
 Examples
 ^^^^^^^^
